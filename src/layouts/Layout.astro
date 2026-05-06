@@ -14,54 +14,151 @@ const { title } = Astro.props;
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <div class="pf-cursor"></div>
     <slot />
   </body>
 </html>
 
 <style is:global>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
 
   :root {
-    --color-bg: #fafafa;
-    --color-text: #1a1a1a;
-    --color-text-muted: #666;
-    --color-accent: #2563eb;
-    --color-border: #e5e5e5;
-    --font-sans: 'Inter', system-ui, sans-serif;
-    --font-serif: 'Playfair Display', Georgia, serif;
-  }
-
-  html {
-    scroll-behavior: smooth;
+    --cream: #f3ede1;
+    --cream-2: #ebe3d3;
+    --cream-3: #ded4bf;
+    --ink: #1a1815;
+    --ink-2: #3d3a33;
+    --ink-3: #6b665a;
+    --rule: rgba(26,24,21,0.14);
+    --ff-display: 'Inter Tight', sans-serif;
+    --ff-body: 'Inter Tight', sans-serif;
+    --ff-mono: 'JetBrains Mono', monospace;
+    --pad-x: 6vw;
+    --pad-y: 88px;
+    --gap: 64px;
   }
 
   body {
-    font-family: var(--font-sans);
-    background: var(--color-bg);
-    color: var(--color-text);
-    line-height: 1.6;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--ff-body);
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
   }
 
-  a {
-    color: inherit;
-    text-decoration: none;
+  a { color: inherit; text-decoration: none; }
+
+  /* Custom cursor */
+  .pf-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--ink);
+    pointer-events: none;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease;
+    z-index: 9999;
+    opacity: 0;
   }
 
-  img {
-    max-width: 100%;
-    height: auto;
+  .pf-cursor.hover {
+    width: 56px;
+    height: 56px;
+    background: var(--cream);
   }
 
-  .container {
-    max-width: 1200px;
+  @media (hover: none) {
+    .pf-cursor { display: none; }
+    body { cursor: auto; }
+  }
+
+  /* Reveal animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1);
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Layout container */
+  .pf {
+    width: 100%;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: var(--pad-y) var(--pad-x);
+    position: relative;
   }
+
+  /* Gradient placeholders */
+  .grad-1 { background: linear-gradient(135deg, #d4b88a 0%, #ebe3d3 60%, #b89968 100%); }
+  .grad-2 { background: radial-gradient(circle at 30% 30%, #c8a574, #1a1815); }
+  .grad-3 { background: linear-gradient(180deg, #ebe3d3 0%, #8a7a52 100%); }
+  .grad-4 { background: conic-gradient(from 220deg at 60% 40%, #d4b88a, #1a1815, #c8a574, #d4b88a); }
 </style>
+
+<script>
+  // Custom cursor
+  const cursor = document.querySelector('.pf-cursor') as HTMLElement;
+  if (cursor) {
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      cursor.style.opacity = '1';
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+    };
+    const onOver = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.closest && t.closest('a, .proj, button, input, .pill')) {
+        cursor.classList.add('hover');
+      } else {
+        cursor.classList.remove('hover');
+      }
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseover', onOver);
+  }
+
+  // Reveal animations
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach((el) => revealObserver.observe(el));
+
+  // Parallax
+  let parallaxRaf = 0;
+  const onScroll = () => {
+    cancelAnimationFrame(parallaxRaf);
+    parallaxRaf = requestAnimationFrame(() => {
+      document.querySelectorAll('[data-parallax]').forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight || 800;
+        const speed = parseFloat((el as HTMLElement).dataset.parallax || '0.05');
+        const offset = (rect.top + rect.height / 2 - vh / 2) * speed;
+        (el as HTMLElement).style.transform = `translateY(${offset.toFixed(2)}px)`;
+      });
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>

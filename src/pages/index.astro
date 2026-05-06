@@ -1,553 +1,490 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const services = [
-  { num: "001", title: "Brand Identity", desc: "Crafting unique visual identities that resonate with your audience and stand out in the market." },
-  { num: "002", title: "Web Design", desc: "Creating beautiful, functional websites that drive engagement and conversions." },
-  { num: "003", title: "UX/UI Design", desc: "Designing intuitive interfaces that delight users and simplify complex workflows." },
-  { num: "004", title: "Digital Strategy", desc: "Developing comprehensive digital strategies to grow your online presence." },
-];
-
 const projects = [
-  { title: "Meridian App", category: "Mobile Design", year: "2024", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=400&fit=crop" },
-  { title: "Nova Dashboard", category: "Web Application", year: "2024", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" },
-  { title: "Pulse Branding", category: "Brand Identity", year: "2023", image: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=600&h=400&fit=crop" },
-  { title: "Vertex Platform", category: "SaaS Design", year: "2023", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" },
+  { n: "01", name: "Cadence", tags: ["Identity", "Product"], year: "2025", grad: "grad-1", featured: true },
+  { n: "02", name: "Northbound", tags: ["Editorial", "Web"], year: "2024", grad: "grad-2" },
+  { n: "03", name: "Lumen Studio", tags: ["Identity", "Print"], year: "2024", grad: "grad-3" },
+  { n: "04", name: "Field Notes", tags: ["Editorial", "Brand"], year: "2023", grad: "grad-4" },
 ];
 
-const stats = [
-  { value: "98+", label: "Projects Completed" },
-  { value: "3.2x", label: "Average ROI" },
-  { value: "98%", label: "Client Satisfaction" },
+const experience = [
+  { yr: "2024 —", place: "Independent", role: "Brand & product design", loc: "Los Angeles, CA" },
+  { yr: "2021 — 24", place: "Field Studio", role: "Senior Designer", loc: "San Francisco, CA" },
+  { yr: "2018 — 21", place: "Hover & Co.", role: "Designer", loc: "Los Angeles, CA" },
+  { yr: "2016 — 18", place: "ArtCenter", role: "BFA, Graphic Design", loc: "Pasadena, CA" },
 ];
 ---
 
-<Layout title="Ximena — Digital Designer">
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="/" class="logo">Ximena</a>
-      <div class="nav-links">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
+<Layout title="Ximena Reyes — Designer">
+  <main class="pf">
+    <!-- Top -->
+    <header class="top reveal">
+      <div class="mark">Ximena Reyes</div>
+      <div class="status">
+        <span class="dot"></span>
+        AVAILABLE — Q3 25
       </div>
-      <a href="#contact" class="nav-cta">Get in Touch</a>
-    </div>
-  </nav>
+    </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <p class="hero-label">Digital Designer</p>
-      <h1 class="hero-title">Hello, I'm<br /><span>Ximena Reyes</span></h1>
-      <p class="hero-subtitle">Creating digital experiences that connect brands with people. Based in Los Angeles, CA.</p>
-      <div class="hero-cta">
-        <a href="#work" class="btn btn-primary">View My Work</a>
-        <a href="#contact" class="btn btn-secondary">Let's Talk</a>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="row r1 reveal">Designer<span class="ampshape"></span></div>
+      <div class="row r2 reveal" style="transition-delay: 160ms">of <em>quiet</em>,</div>
+      <div class="row r3 reveal" style="transition-delay: 320ms">
+        considered<span class="pill">brand · editorial · product</span>
+      </div>
+      <div class="row r4 reveal" style="transition-delay: 480ms">
+        <em>systems.</em>
+      </div>
+    </section>
+
+    <!-- Lede -->
+    <div class="lede">
+      <div class="reveal">
+        <div class="lbl">↳ The Practice</div>
+        <p>
+          A small studio of one, working between <em>brand</em>, <em>editorial</em>, and <em>product</em>. I help founders and creative teams craft careful, considered work that earns a second look.
+        </p>
+      </div>
+      <div class="reveal" style="transition-delay: 160ms">
+        <div class="lbl">↳ Currently</div>
+        <p>
+          Building identity systems for two early-stage companies and finishing a printed monograph for an architecture studio. Open to projects starting in Q3.
+        </p>
       </div>
     </div>
-  </section>
 
-  <!-- Stats -->
-  <section class="stats">
-    <div class="container stats-grid">
-      {stats.map((stat) => (
-        <div class="stat-item">
-          <span class="stat-value">{stat.value}</span>
-          <span class="stat-label">{stat.label}</span>
+    <!-- Work -->
+    <div class="work-head">
+      <span class="l reveal">↳ Selected · 04 of 12</span>
+      <h2 class="reveal" id="work">Recent <em>work.</em></h2>
+    </div>
+
+    <section class="work-grid">
+      {projects.map((p, i) => (
+        <a href="#" class={`proj reveal ${p.featured ? "featured" : ""}`} style={`transition-delay: ${i * 90}ms`}>
+          <div class={`thumb ${p.grad}`} data-parallax={i % 2 ? "-0.04" : "0.04"}></div>
+          <div class="meta">
+            <span class="name">{p.name}</span>
+            <span class="tag">{p.tags[0]}</span>
+            <span class="yr">{p.year}</span>
+          </div>
+        </a>
+      ))}
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <div class="lbl reveal">↳ About</div>
+      <p class="body reveal">
+        I'm a designer based in Los Angeles working at the edge of brand, editorial, and product. Previously at <em>Field Studio</em> and <em>Hover & Co.</em> Now independent, by <em>appointment</em>.
+      </p>
+    </section>
+
+    <!-- Experience -->
+    <section class="exp">
+      <div class="exp-head reveal">
+        <span>Year</span>
+        <span>Place</span>
+        <span>Role</span>
+        <span style="text-align: right">Location</span>
+      </div>
+      {experience.map((e, i) => (
+        <div class="exp-row reveal" style={`transition-delay: ${i * 60}ms`}>
+          <span class="yr">{e.yr}</span>
+          <span class="place">{e.place}</span>
+          <span class="role">{e.role}</span>
+          <span class="loc">{e.loc}</span>
         </div>
       ))}
-    </div>
-  </section>
+    </section>
 
-  <!-- Work -->
-  <section id="work" class="work">
-    <div class="container">
-      <div class="section-header">
-        <h2>Selected Work</h2>
-        <p>A collection of projects I'm proud of</p>
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+      <h2 class="big reveal">Let's <em>talk.</em></h2>
+      <div class="email-row reveal" style="transition-delay: 160ms">
+        <a href="mailto:hello@ximena.design">hello@ximena.design</a>
       </div>
-      <div class="projects-grid">
-        {projects.map((project) => (
-          <a href="#" class="project-card">
-            <div class="project-image">
-              <img src={project.image} alt={project.title} loading="lazy" />
-            </div>
-            <div class="project-info">
-              <span class="project-category">{project.category}</span>
-              <h3>{project.title}</h3>
-              <span class="project-year">{project.year}</span>
-            </div>
-          </a>
-        ))}
+      <div class="row reveal">
+        <span>© 2025 Ximena Reyes</span>
+        <span>Los Angeles, CA · 34.0522° N</span>
+        <span>Available · Q3 2025</span>
       </div>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section id="services" class="services">
-    <div class="container">
-      <div class="section-header">
-        <h2>Services</h2>
-        <p>How I can help bring your vision to life</p>
-      </div>
-      <div class="services-list">
-        {services.map((service) => (
-          <div class="service-item">
-            <span class="service-num">{service.num}</span>
-            <div class="service-content">
-              <h3>{service.title}</h3>
-              <p>{service.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="about">
-    <div class="container about-grid">
-      <div class="about-image">
-        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&h=600&fit=crop" alt="Ximena" />
-      </div>
-      <div class="about-content">
-        <h2>About Me</h2>
-        <p>With over 8 years of experience in digital design, I specialize in creating meaningful connections between brands and their audiences through thoughtful, user-centered design.</p>
-        <p>I believe great design is invisible — it just works. My approach combines strategic thinking with creative execution to deliver solutions that not only look beautiful but drive real results.</p>
-        <a href="#contact" class="btn btn-primary">Work With Me</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <div class="section-header">
-        <h2>Let's Create Together</h2>
-        <p>Have a project in mind? I'd love to hear about it.</p>
-      </div>
-      <a href="mailto:hello@ximena.design" class="contact-email">hello@ximena.design</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="logo">Ximena</span>
-        <p>Digital Designer based in Los Angeles, creating experiences that matter.</p>
-      </div>
-      <div class="footer-links">
-        <div class="footer-col">
-          <h4>Navigation</h4>
-          <a href="#work">Work</a>
-          <a href="#services">Services</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <div class="footer-col">
-          <h4>Social</h4>
-          <a href="#">LinkedIn</a>
-          <a href="#">Dribbble</a>
-          <a href="#">Twitter</a>
-          <a href="#">Instagram</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2024 Ximena Reyes. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </main>
 </Layout>
 
 <style>
-  /* Navigation */
-  .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(250, 250, 250, 0.9);
-    backdrop-filter: blur(10px);
-    z-index: 100;
-    border-bottom: 1px solid var(--color-border);
+  /* Top */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 13px;
+    letter-spacing: 0.02em;
   }
 
-  .nav-inner {
+  .top .mark {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .top .status {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height: 72px;
+    gap: 10px;
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    opacity: 0.7;
   }
 
-  .logo {
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    font-weight: 600;
+  .top .dot {
+    width: 7px;
+    height: 7px;
+    background: #5b8a4a;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(91,138,74,0.18);
+    animation: pulse 2.4s ease-in-out infinite;
   }
 
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .nav-links a {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover {
-    color: var(--color-text);
-  }
-
-  .nav-cta {
-    font-size: 0.9rem;
-    font-weight: 500;
-    padding: 0.6rem 1.2rem;
-    border: 1px solid var(--color-text);
-    border-radius: 100px;
-    transition: all 0.2s;
-  }
-
-  .nav-cta:hover {
-    background: var(--color-text);
-    color: var(--color-bg);
+  @keyframes pulse {
+    50% { box-shadow: 0 0 0 6px rgba(91,138,74,0.0); }
   }
 
   /* Hero */
   .hero {
-    padding: 180px 0 100px;
-    text-align: center;
+    margin-top: 80px;
   }
 
-  .hero-label {
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--color-text-muted);
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-title {
-    font-family: var(--font-serif);
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-title span {
-    color: var(--color-accent);
-  }
-
-  .hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--color-text-muted);
-    max-width: 500px;
-    margin: 0 auto 2.5rem;
-  }
-
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 0.875rem 1.75rem;
-    border-radius: 100px;
-    font-size: 0.9rem;
+  .hero .row {
+    font-family: var(--ff-display);
     font-weight: 500;
-    transition: all 0.2s;
-  }
-
-  .btn-primary {
-    background: var(--color-text);
-    color: var(--color-bg);
-  }
-
-  .btn-primary:hover {
-    background: var(--color-accent);
-  }
-
-  .btn-secondary {
-    border: 1px solid var(--color-border);
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--color-text);
-  }
-
-  /* Stats */
-  .stats {
-    padding: 60px 0;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    text-align: center;
-  }
-
-  .stat-value {
-    display: block;
-    font-family: var(--font-serif);
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-
-  .stat-label {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-  }
-
-  /* Sections */
-  .section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-
-  .section-header h2 {
-    font-family: var(--font-serif);
-    font-size: 2.5rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .section-header p {
-    color: var(--color-text-muted);
-  }
-
-  /* Work */
-  .work {
-    padding: 100px 0;
-  }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-
-  .project-card {
-    display: block;
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  }
-
-  .project-image {
-    aspect-ratio: 3/2;
-    overflow: hidden;
-  }
-
-  .project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-  }
-
-  .project-card:hover .project-image img {
-    transform: scale(1.05);
-  }
-
-  .project-info {
-    padding: 1.5rem;
-  }
-
-  .project-category {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-accent);
-  }
-
-  .project-info h3 {
-    font-size: 1.25rem;
-    margin: 0.5rem 0;
-  }
-
-  .project-year {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-  }
-
-  /* Services */
-  .services {
-    padding: 100px 0;
-    background: white;
-  }
-
-  .services-list {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .service-item {
+    font-size: clamp(72px, 15vw, 220px);
+    line-height: 0.86;
+    letter-spacing: -0.05em;
     display: flex;
-    gap: 2rem;
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--color-border);
+    align-items: baseline;
+    gap: 0.18em;
+    flex-wrap: wrap;
+    margin: 0;
   }
 
-  .service-num {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    color: var(--color-accent);
+  .hero .row + .row {
+    margin-top: -0.04em;
+  }
+
+  .hero .r2 {
+    justify-content: flex-end;
+  }
+
+  .hero .r4 {
+    justify-content: flex-end;
+  }
+
+  .hero em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .hero .ampshape {
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4b88a, #8a7a52);
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateY(-0.1em);
     flex-shrink: 0;
   }
 
-  .service-content h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+  .hero .pill {
+    display: inline-block;
+    font-size: clamp(14px, 1.4vw, 22px);
+    font-family: var(--ff-body);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    padding: 0.6em 1.2em;
+    border: 1px solid var(--ink);
+    border-radius: 100px;
+    transform: translateY(-0.4em);
+    white-space: nowrap;
   }
 
-  .service-content p {
-    color: var(--color-text-muted);
+  /* Lede */
+  .lede {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap);
+    border-top: 1px solid var(--rule);
+    padding-top: 40px;
+  }
+
+  .lede .lbl,
+  .about .lbl,
+  .exp-head {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    opacity: 0.55;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 18px;
+  }
+
+  .lede p {
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.45;
+    margin: 0;
+    color: var(--ink-2);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    max-width: 480px;
+  }
+
+  .lede p em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Work */
+  .work-head {
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 24px;
+  }
+
+  .work-head .l {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    opacity: 0.55;
+  }
+
+  .work-head h2 {
+    font-family: var(--ff-display);
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 64px);
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .work-head h2 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+  }
+
+  .work-grid {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px var(--gap);
+  }
+
+  .proj {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .proj.featured {
+    grid-column: 1 / -1;
+  }
+
+  .proj .thumb {
+    aspect-ratio: 16 / 10;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.7s cubic-bezier(.2,.7,.2,1);
+  }
+
+  .proj.featured .thumb {
+    aspect-ratio: 21 / 9;
+  }
+
+  .proj:hover .thumb {
+    transform: scale(1.01);
+  }
+
+  .proj .meta {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 24px;
+    align-items: baseline;
+  }
+
+  .proj .meta .name {
+    font-family: var(--ff-display);
+    font-size: clamp(22px, 2.2vw, 32px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .proj .meta .yr,
+  .proj .meta .tag {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    opacity: 0.55;
   }
 
   /* About */
   .about {
-    padding: 100px 0;
-  }
-
-  .about-grid {
+    margin-top: 200px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+    grid-template-columns: 200px 1fr;
+    gap: var(--gap);
   }
 
-  .about-image img {
-    border-radius: 16px;
+  .about .body {
+    font-family: var(--ff-display);
+    font-size: clamp(28px, 3.4vw, 48px);
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    font-weight: 300;
+    margin: 0;
+    max-width: 880px;
   }
 
-  .about-content h2 {
-    font-family: var(--font-serif);
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+  .about .body em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
   }
 
-  .about-content p {
-    color: var(--color-text-muted);
-    margin-bottom: 1.5rem;
+  /* Experience */
+  .exp {
+    margin-top: 160px;
   }
 
-  /* Contact */
-  .contact {
-    padding: 100px 0;
-    background: white;
-    text-align: center;
+  .exp-head {
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 90px 1fr 1fr 200px;
+    gap: 24px;
+    margin-bottom: 0;
   }
 
-  .contact-email {
-    font-family: var(--font-serif);
-    font-size: clamp(1.5rem, 4vw, 3rem);
-    color: var(--color-accent);
-    transition: opacity 0.2s;
+  .exp-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 1fr 200px;
+    gap: 24px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+    font-size: 16px;
   }
 
-  .contact-email:hover {
-    opacity: 0.7;
+  .exp-row .yr {
+    font-family: var(--ff-mono);
+    font-size: 12px;
+    opacity: 0.6;
+  }
+
+  .exp-row .place {
+    font-family: var(--ff-display);
+    font-size: clamp(18px, 1.7vw, 22px);
+    letter-spacing: -0.015em;
+    font-weight: 400;
+  }
+
+  .exp-row .role {
+    color: var(--ink-3);
+    font-size: 14px;
+  }
+
+  .exp-row .loc {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    opacity: 0.55;
+    text-align: right;
   }
 
   /* Footer */
   .footer {
-    padding: 80px 0 40px;
-    background: var(--color-text);
-    color: var(--color-bg);
+    margin-top: 220px;
+    padding: 100px 0 0;
+    border-top: 1px solid var(--rule);
+    position: relative;
   }
 
-  .footer-inner {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 4rem;
+  .footer .big {
+    font-family: var(--ff-display);
+    font-size: clamp(96px, 14vw, 200px);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
   }
 
-  .footer-brand .logo {
-    display: block;
-    margin-bottom: 1rem;
+  .footer .big em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
   }
 
-  .footer-brand p {
-    opacity: 0.7;
-    font-size: 0.9rem;
+  .footer .email-row {
+    margin-top: 60px;
+    text-align: center;
+    font-size: clamp(20px, 2.4vw, 32px);
+    font-weight: 300;
+    letter-spacing: -0.01em;
   }
 
-  .footer-col h4 {
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 1rem;
-    opacity: 0.5;
+  .footer .email-row a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 6px;
   }
 
-  .footer-col a {
-    display: block;
-    font-size: 0.9rem;
-    opacity: 0.7;
-    margin-bottom: 0.5rem;
-    transition: opacity 0.2s;
-  }
-
-  .footer-col a:hover {
-    opacity: 1;
-  }
-
-  .footer-bottom {
-    grid-column: 1 / -1;
-    padding-top: 2rem;
-    margin-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.875rem;
-    opacity: 0.5;
+  .footer .row {
+    margin-top: 120px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    opacity: 0.55;
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
   /* Responsive */
-  @media (max-width: 768px) {
-    .nav-links {
+  @media (max-width: 760px) {
+    .lede,
+    .about {
+      grid-template-columns: 1fr;
+    }
+
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .exp-head,
+    .exp-row {
+      grid-template-columns: 60px 1fr 1fr;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .exp-head > :last-child,
+    .exp-row .loc {
       display: none;
     }
 
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .about-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .about-image {
-      order: -1;
-    }
-
-    .footer-inner {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 4rem;
-    }
-
-    .stats-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+    .hero .pill {
+      transform: none;
     }
   }
 </style>
