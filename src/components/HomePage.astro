@@ -1,0 +1,502 @@
+---
+import Layout from "../layouts/Layout.astro";
+import LanguagePicker from "./LanguagePicker.astro";
+import { getLocaleFromUrl, useTranslations } from "../i18n/utils";
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const projects = [
+  { n: "01", name: "Fintech Rebrand", tags: ["Strategy", "Launch"], year: "2025", grad: "grad-1", featured: true },
+  { n: "02", name: "Museo Digital", tags: ["Digital", "Program"], year: "2024", grad: "grad-2" },
+  { n: "03", name: "Vertex Studio", tags: ["Operations", "Design"], year: "2024", grad: "grad-3" },
+  { n: "04", name: "Marca Ciudad", tags: ["Branding", "Civic"], year: "2023", grad: "grad-4" },
+];
+
+const experience = [
+  { yr: "2024 —", place: "Independent", role: t.experience.roles.project_lead, loc: "Ciudad de México" },
+  { yr: "2021 — 24", place: "Estudio Raíz", role: t.experience.roles.senior_pm, loc: "Ciudad de México" },
+  { yr: "2018 — 21", place: "Ideame", role: t.experience.roles.operations, loc: "Buenos Aires" },
+  { yr: "2014 — 18", place: "ITAM", role: t.experience.roles.degree, loc: "Ciudad de México" },
+];
+---
+
+<Layout title={t.meta.title} locale={locale}>
+  <main class="pf">
+    <!-- Top -->
+    <header class="top reveal">
+      <div class="mark">Ximena Alvarez Sosa</div>
+      <div class="top-right">
+        <LanguagePicker />
+        <div class="status">
+          <span class="dot"></span>
+          {t.header.available}
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="row r1 reveal">{t.hero.designer}<span class="ampshape"></span></div>
+      <div class="row r2 reveal" style="transition-delay: 160ms">{t.hero.of} <em>{t.hero.quiet}</em>,</div>
+      <div class="row r3 reveal" style="transition-delay: 320ms">
+        {t.hero.considered}<span class="pill">{t.hero.pill}</span>
+      </div>
+      <div class="row r4 reveal" style="transition-delay: 480ms">
+        <em>{t.hero.systems}</em>
+      </div>
+    </section>
+
+    <!-- Lede -->
+    <div class="lede">
+      <div class="reveal">
+        <div class="lbl">{t.practice.label}</div>
+        <p set:html={t.practice.text} />
+      </div>
+      <div class="reveal" style="transition-delay: 160ms">
+        <div class="lbl">{t.currently.label}</div>
+        <p>{t.currently.text}</p>
+      </div>
+    </div>
+
+    <!-- Work -->
+    <div class="work-head">
+      <span class="l reveal">{t.work.label}</span>
+      <h2 class="reveal" id="work">{t.work.title} <em>{t.work.titleEm}</em></h2>
+    </div>
+
+    <section class="work-grid">
+      {projects.map((p, i) => (
+        <a href="#" class={`proj reveal ${p.featured ? "featured" : ""}`} style={`transition-delay: ${i * 90}ms`}>
+          <div class={`thumb ${p.grad}`} data-parallax={i % 2 ? "-0.04" : "0.04"}></div>
+          <div class="meta">
+            <span class="name">{p.name}</span>
+            <span class="tag">{p.tags[0]}</span>
+            <span class="yr">{p.year}</span>
+          </div>
+        </a>
+      ))}
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <div class="lbl reveal">{t.about.label}</div>
+      <p class="body reveal" set:html={t.about.text} />
+    </section>
+
+    <!-- Experience -->
+    <section class="exp">
+      <div class="exp-head reveal">
+        <span>{t.experience.year}</span>
+        <span>{t.experience.place}</span>
+        <span>{t.experience.role}</span>
+        <span style="text-align: right">{t.experience.location}</span>
+      </div>
+      {experience.map((e, i) => (
+        <div class="exp-row reveal" style={`transition-delay: ${i * 60}ms`}>
+          <span class="yr">{e.yr}</span>
+          <span class="place">{e.place}</span>
+          <span class="role">{e.role}</span>
+          <span class="loc">{e.loc}</span>
+        </div>
+      ))}
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+      <h2 class="big reveal">{t.footer.cta} <em>{t.footer.ctaEm}</em></h2>
+      <div class="email-row reveal" style="transition-delay: 160ms">
+        <a href="mailto:hola@ximena.mx">hola@ximena.mx</a>
+      </div>
+      <div class="row reveal">
+        <span>{t.footer.copyright}</span>
+        <span>{t.footer.coords}</span>
+        <span>{t.footer.status}</span>
+      </div>
+    </footer>
+  </main>
+</Layout>
+
+<style>
+  /* Top */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+
+  .top .mark {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .top-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .top .status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  .top .dot {
+    width: 7px;
+    height: 7px;
+    background: #5b8a4a;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(91,138,74,0.18);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    50% { box-shadow: 0 0 0 6px rgba(91,138,74,0.0); }
+  }
+
+  /* Hero */
+  .hero {
+    margin-top: 80px;
+  }
+
+  .hero .row {
+    font-family: var(--ff-display);
+    font-weight: 500;
+    font-size: clamp(72px, 15vw, 220px);
+    line-height: 0.86;
+    letter-spacing: -0.05em;
+    display: flex;
+    align-items: baseline;
+    gap: 0.18em;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+
+  .hero .row + .row {
+    margin-top: -0.04em;
+  }
+
+  .hero .r2 {
+    justify-content: flex-end;
+  }
+
+  .hero .r4 {
+    justify-content: flex-end;
+  }
+
+  .hero em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .hero .ampshape {
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4b88a, #8a7a52);
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateY(-0.1em);
+    flex-shrink: 0;
+  }
+
+  .hero .pill {
+    display: inline-block;
+    font-size: clamp(14px, 1.4vw, 22px);
+    font-family: var(--ff-body);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    padding: 0.6em 1.2em;
+    border: 1px solid var(--ink);
+    border-radius: 100px;
+    transform: translateY(-0.4em);
+    white-space: nowrap;
+  }
+
+  /* Lede */
+  .lede {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap);
+    border-top: 1px solid var(--rule);
+    padding-top: 40px;
+  }
+
+  .lede .lbl,
+  .about .lbl,
+  .exp-head {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    opacity: 0.55;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 18px;
+  }
+
+  .lede p {
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.45;
+    margin: 0;
+    color: var(--ink-2);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    max-width: 480px;
+  }
+
+  .lede p :global(em) {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Work */
+  .work-head {
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 24px;
+  }
+
+  .work-head .l {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    opacity: 0.55;
+  }
+
+  .work-head h2 {
+    font-family: var(--ff-display);
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 64px);
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .work-head h2 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+  }
+
+  .work-grid {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px var(--gap);
+  }
+
+  .proj {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .proj.featured {
+    grid-column: 1 / -1;
+  }
+
+  .proj .thumb {
+    aspect-ratio: 16 / 10;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.7s cubic-bezier(.2,.7,.2,1);
+  }
+
+  .proj.featured .thumb {
+    aspect-ratio: 21 / 9;
+  }
+
+  .proj:hover .thumb {
+    transform: scale(1.01);
+  }
+
+  .proj .meta {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 24px;
+    align-items: baseline;
+  }
+
+  .proj .meta .name {
+    font-family: var(--ff-display);
+    font-size: clamp(22px, 2.2vw, 32px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .proj .meta .yr,
+  .proj .meta .tag {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    opacity: 0.55;
+  }
+
+  /* About */
+  .about {
+    margin-top: 200px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--gap);
+  }
+
+  .about .body {
+    font-family: var(--ff-display);
+    font-size: clamp(28px, 3.4vw, 48px);
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    font-weight: 300;
+    margin: 0;
+    max-width: 880px;
+  }
+
+  .about .body :global(em) {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* Experience */
+  .exp {
+    margin-top: 160px;
+  }
+
+  .exp-head {
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 90px 1fr 1fr 200px;
+    gap: 24px;
+    margin-bottom: 0;
+  }
+
+  .exp-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 1fr 200px;
+    gap: 24px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+    font-size: 16px;
+  }
+
+  .exp-row .yr {
+    font-family: var(--ff-mono);
+    font-size: 12px;
+    opacity: 0.6;
+  }
+
+  .exp-row .place {
+    font-family: var(--ff-display);
+    font-size: clamp(18px, 1.7vw, 22px);
+    letter-spacing: -0.015em;
+    font-weight: 400;
+  }
+
+  .exp-row .role {
+    color: var(--ink-3);
+    font-size: 14px;
+  }
+
+  .exp-row .loc {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    opacity: 0.55;
+    text-align: right;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 220px;
+    padding: 100px 0 0;
+    border-top: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .footer .big {
+    font-family: var(--ff-display);
+    font-size: clamp(96px, 14vw, 200px);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+  }
+
+  .footer .big em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .footer .email-row {
+    margin-top: 60px;
+    text-align: center;
+    font-size: clamp(20px, 2.4vw, 32px);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
+
+  .footer .email-row a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 6px;
+  }
+
+  .footer .row {
+    margin-top: 120px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    opacity: 0.55;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* Responsive */
+  @media (max-width: 760px) {
+    .lede,
+    .about {
+      grid-template-columns: 1fr;
+    }
+
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .exp-head,
+    .exp-row {
+      grid-template-columns: 60px 1fr 1fr;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .exp-head > :last-child,
+    .exp-row .loc {
+      display: none;
+    }
+
+    .hero .pill {
+      transform: none;
+    }
+
+    .top-right {
+      gap: 16px;
+    }
+  }
+</style>

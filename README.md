@@ -1,58 +1,40 @@
 # Ximena Alvarez Sosa — Portfolio
 
-Edit `portfolio-site.html` to update content.
+## How to Edit Content
 
-## Content Locations
+### Text Content (English)
+Edit `src/i18n/en.json`:
+- **Page title** — `meta.title`
+- **Availability badge** — `header.available`
+- **Hero headline** — `hero.designer`, `hero.quiet`, `hero.considered`, `hero.systems`
+- **Hero tags** — `hero.pill`
+- **Intro paragraphs** — `practice.text`, `currently.text`
+- **About bio** — `about.text`
+- **Footer info** — `footer.copyright`, `footer.coords`, `footer.status`
 
-### Your Name & Availability
-| What | Line |
-|------|------|
-| Name in header | 696 |
-| Availability status | 704 |
+### Text Content (Spanish)
+Edit `src/i18n/es.json` — same structure as English.
 
-### Hero Section (Big Text)
-| What | Line |
-|------|------|
-| First word ("Projects") | 709 |
-| Second line ("with soul") | 710 |
-| Third line ("delivered") | 712 |
-| Pills (strategy/design/execution) | 714 |
-| Last word ("beautifully") | 718 |
-
-### Introduction Text
-| What | Line |
-|------|------|
-| "The Approach" paragraph | 726 |
-| "Currently" paragraph | 732 |
-
-### Projects (Lines 562-567)
-Each project has: `name`, `desc` (description), `tags`, `year`
-
-```
-{ name: 'Fintech Rebrand', desc: '...', tags: ['Strategy','Launch'], year: '2025' }
+### Projects
+Edit `src/components/HomePage.astro` (lines 9-14):
+```js
+{ n: "01", name: "Project Name", tags: ["Tag1", "Tag2"], year: "2025" }
 ```
 
-### Experience (Lines 569-574)
-Each entry has: `yr` (years), `place`, `role`, `loc` (location)
-
+### Experience / CV
+Edit `src/components/HomePage.astro` (lines 16-21):
+```js
+{ yr: "2024 —", place: "Company", role: t.experience.roles.project_lead, loc: "City" }
 ```
-{ yr: '2024 —', place: 'Independent', role: 'Project Lead & Strategist', loc: 'CDMX' }
-```
+Role labels come from the i18n files under `experience.roles`.
 
-### About Section
-| What | Line |
-|------|------|
-| About paragraph | 760 |
+### Email Address
+Edit `src/components/HomePage.astro` (line 109).
 
-### Footer
-| What | Line |
-|------|------|
-| Email address | 784 |
-| Copyright name | 787 |
-| City & coordinates | 788 |
-| Availability | 789 |
+### Name in Header
+Edit `src/components/HomePage.astro` (line 28).
 
 ## Tips
-- Text inside `<em>...</em>` appears in gold italic
-- Keep quotes `'...'` around text values
-- Don't delete commas between items
+- Text inside `<em>...</em>` appears in italic accent style
+- Keep quotes around text values
+- The site supports English and Spanish — update both i18n files for full translation

@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "title": "Ximena Alvarez Sosa — Líder de Proyectos"
+  },
+  "header": {
+    "available": "DISPONIBLE"
+  },
+  "hero": {
+    "designer": "Proyectos",
+    "of": "con",
+    "quiet": "alma",
+    "considered": "entregados",
+    "pill": "estrategia · diseño · ejecución",
+    "systems": "con belleza."
+  },
+  "practice": {
+    "label": "↳ El Enfoque",
+    "text": "Aporto una <em>sensibilidad de diseño</em> a la gestión de proyectos — orquestando equipos, tiempos y visión creativa en trabajo que se entrega a tiempo y <em>se siente bien</em>."
+  },
+  "currently": {
+    "label": "↳ Actualmente",
+    "text": "Liderando dos lanzamientos de producto y asesorando a una institución cultural en su hoja de ruta digital. Abierta a nuevas colaboraciones este trimestre."
+  },
+  "work": {
+    "label": "↳ Selección · 04 de 12",
+    "title": "Trabajo",
+    "titleEm": "reciente."
+  },
+  "about": {
+    "label": "↳ Acerca de",
+    "text": "Soy líder de proyectos en la Ciudad de México que cree que el gran trabajo sucede cuando <em>la estrategia se encuentra con el oficio</em>. Anteriormente en <em>Estudio Raíz</em> e <em>Ideame</em>. Ahora independiente, trabajando con equipos que se preocupan por <em>cómo</em> se hacen las cosas."
+  },
+  "experience": {
+    "year": "Año",
+    "place": "Lugar",
+    "role": "Rol",
+    "location": "Ubicación",
+    "roles": {
+      "project_lead": "Líder de Proyectos y Estratega",
+      "senior_pm": "Project Manager Senior",
+      "operations": "Líder de Operaciones",
+      "degree": "Lic. Negocios y Diseño"
+    }
+  },
+  "footer": {
+    "cta": "Hablemos",
+    "ctaEm": ".",
+    "copyright": "© 2025 Ximena Alvarez Sosa",
+    "coords": "Ciudad de México · 19.4326° N",
+    "status": "Disponible"
+  },
+  "lang": {
+    "en": "EN",
+    "es": "ES"
+  }
+}

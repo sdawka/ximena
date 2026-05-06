@@ -1,0 +1,41 @@
+---
+import { getLocaleFromUrl, getLocalizedPath, type Locale } from "../i18n/utils";
+
+const locale = getLocaleFromUrl(Astro.url);
+const otherLocale: Locale = locale === "en" ? "es" : "en";
+const otherPath = getLocalizedPath(Astro.url.pathname, otherLocale);
+---
+
+<div class="lang-picker">
+  <a href="/" class:list={["lang", { active: locale === "en" }]}>EN</a>
+  <span class="sep">/</span>
+  <a href="/es" class:list={["lang", { active: locale === "es" }]}>ES</a>
+</div>
+
+<style>
+  .lang-picker {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .lang {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+  }
+
+  .lang:hover {
+    opacity: 0.8;
+  }
+
+  .lang.active {
+    opacity: 1;
+  }
+
+  .sep {
+    opacity: 0.3;
+  }
+</style>
