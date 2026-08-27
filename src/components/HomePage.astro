@@ -7,10 +7,10 @@ const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 
 const projects = [
-  { n: "01", name: "Fintech Rebrand", tags: ["Strategy", "Launch"], year: "2025", featured: true },
-  { n: "02", name: "Museo Digital", tags: ["Digital", "Program"], year: "2024", shape: "portrait" },
-  { n: "03", name: "Vertex Studio", tags: ["Operations", "Design"], year: "2024", shape: "landscape" },
-  { n: "04", name: "Marca Ciudad", tags: ["Branding", "Civic"], year: "2023", shape: "offset" },
+  { n: "01", name: "Fintech Rebrand", tag: "Strategy", year: "2025" },
+  { n: "02", name: "Museo Digital", tag: "Digital", year: "2024" },
+  { n: "03", name: "Vertex Studio", tag: "Operations", year: "2024" },
+  { n: "04", name: "Marca Ciudad", tag: "Branding", year: "2023" },
 ];
 
 const experience = [
@@ -19,6 +19,8 @@ const experience = [
   { yr: "2018 — 21", place: "Ideame", role: t.experience.roles.operations, loc: "Buenos Aires" },
   { yr: "2014 — 18", place: "ITAM", role: t.experience.roles.degree, loc: "Ciudad de México" },
 ];
+
+const railStages = ["ORIENT", "ALIGN", "NAVIGATE", "TRACE", "ARRIVE"];
 ---
 
 <Layout title={t.meta.title} locale={locale}>
@@ -34,23 +36,26 @@ const experience = [
       </filter>
       <rect width="100" height="100" filter="url(#paper-grain)" opacity="0.8" />
     </svg>
-
-    <svg class="living-contour" viewBox="0 0 1440 980" fill="none" focusable="false">
-      <path class="contour-path" pathLength="1" d="M-85 196C143 24 335 54 467 194c140 149 259 142 386 22 160-151 309-137 672 70" />
-      <path class="contour-path contour-path--soft" pathLength="1" d="M-118 302c235-177 419-135 548 5 129 141 293 181 447 32 143-138 320-129 654 80" />
-      <path class="contour-path contour-path--oxide" pathLength="1" d="M104 898c54-148 136-231 260-249 158-23 232 113 375 82 139-30 163-173 317-197 111-17 215 34 353 143" />
-      <circle cx="1055" cy="534" r="6" />
-      <circle cx="1055" cy="534" r="18" />
+    <svg class="journey-handoff" viewBox="0 0 1440 1000" fill="none" focusable="false">
+      <path pathLength="1" d="M-100 188c221-151 390-96 515 31 136 139 276 132 412 5 161-151 331-111 713 99" />
+      <path class="journey-handoff__oxide" pathLength="1" d="M42 881c163-181 332-201 456-76 131 133 246 81 347-25 123-128 269-122 546 30" />
     </svg>
   </div>
 
-  <div class="progress-rail" aria-hidden="true"><span></span></div>
+  <div class="journey-rail" aria-hidden="true">
+    {railStages.map((stage, index) => (
+      <div class="journey-rail__stage" data-rail-stage={index}>
+        <span>{stage}</span><i></i>
+      </div>
+    ))}
+  </div>
+
   <div class="custom-cursor" aria-hidden="true">
     <span class="cursor-core"></span><span class="cursor-label">VIEW</span>
   </div>
 
   <main class="portfolio">
-    <header class="top reveal-text">
+    <header class="top">
       <div class="mark">Ximena Alvarez Sosa</div>
       <div class="top-right">
         <LanguagePicker />
@@ -58,172 +63,283 @@ const experience = [
       </div>
     </header>
 
-    <section class="hero" aria-labelledby="hero-title" data-hero>
-      <h1 id="hero-title">
-        <span class="hero-line hero-line--one"><span class="hero-line-inner">{t.hero.designer}</span></span>
-        <span class="hero-line hero-line--two">
-          <span class="hero-line-inner">{t.hero.of} <em>{t.hero.quiet}</em>,</span>
-        </span>
-        <span class="hero-line hero-line--three">
-          <span class="hero-line-inner">{t.hero.considered}</span>
-          <span class="practice-pill hero-line-inner">{t.hero.pill}</span>
-        </span>
-        <span class="hero-line hero-line--four"><span class="hero-line-inner"><em>{t.hero.systems}</em></span></span>
-      </h1>
-
-      <svg class="hero-orbit" viewBox="0 0 300 300" aria-hidden="true" focusable="false" data-hero-orbit>
-        <g class="hero-orbit-ring">
-          <ellipse cx="150" cy="150" rx="126" ry="68" />
-          <path d="M150 72v-15M143 64h14" />
-          <circle cx="276" cy="150" r="3" />
-        </g>
-        <circle class="hero-orbit-core" cx="150" cy="150" r="46" />
-      </svg>
-
-      <a class="scroll-cue" href="#work" data-cursor="VIEW">
-        <span>{t.work.action}</span>
-        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-          <path d="M24 8v29M16 29l8 8 8-8" />
+    <section
+      class="hero journey-section"
+      id="orient"
+      aria-labelledby="hero-title"
+      data-journey
+      data-stage="orient"
+      style="--section-progress: 1"
+    >
+      <div class="hero-scene journey-scene" data-hero>
+        <svg class="orient-field" viewBox="0 0 1200 720" aria-hidden="true" focusable="false">
+          <g class="orient-ticks">
+            <path d="M98 96h28M112 82v28M1040 594h28M1054 580v28M854 124h20M864 114v20" />
+            <circle cx="112" cy="96" r="4" />
+            <circle cx="1054" cy="594" r="4" />
+          </g>
+          <path class="orient-path orient-path--one" pathLength="1" d="M-20 174c168-112 290-92 386 3 93 91 175 107 282 38" />
+          <path class="orient-path orient-path--two" pathLength="1" d="M511 637c60-151 184-219 296-146 96 62 126 141 296 126" />
+          <path class="orient-path orient-path--three" pathLength="1" d="M814 90c-80 91-91 176-23 239 58 53 146 47 252 126" />
+          <path class="orient-resolved" pathLength="1" d="M366 177c93 91 175 107 282 38 83-53 99-106 166-125" />
+          <g class="orient-beacon">
+            <circle r="12" />
+            <circle class="orient-beacon-ring" r="27" />
+          </g>
+          <g class="orient-compass">
+            <ellipse cx="600" cy="350" rx="472" ry="216" />
+            <path d="M600 134v-28M586 116h28" />
+          </g>
         </svg>
-      </a>
-    </section>
 
-    <section class="practice" aria-labelledby="practice-title">
-      <div class="practice-label reveal-text">
-        <p class="eyebrow">{t.practice.label}</p>
-        <h2 id="practice-title">{t.practice.title}</h2>
-      </div>
-      <div class="practice-copy">
-        <div class="reveal-rule"></div>
-        <p class="reveal-text" set:html={t.practice.text} />
-        <div class="current reveal-text">
-          <span class="eyebrow">{t.currently.label}</span>
-          <p>{t.currently.text}</p>
-        </div>
-      </div>
-    </section>
+        <h1 id="hero-title">
+          <span class="hero-line hero-line--one"><span>{t.hero.designer}</span></span>
+          <span class="hero-line hero-line--two"><span>{t.hero.of} <em>{t.hero.quiet}</em>,</span></span>
+          <span class="hero-line hero-line--three">
+            <span>{t.hero.considered}</span>
+            <small class="practice-pill">{t.hero.pill}</small>
+          </span>
+          <span class="hero-line hero-line--four"><span><em>{t.hero.systems}</em></span></span>
+        </h1>
 
-    <section class="work-band full-bleed" id="work" aria-labelledby="work-title">
-      <div class="band-inner">
-        <div class="work-head">
-          <span class="eyebrow reveal-text">{t.work.label}</span>
-          <h2 id="work-title" class="reveal-text">{t.work.title} <em>{t.work.titleEm}</em></h2>
-          <div class="work-rule reveal-rule"></div>
-        </div>
-
-        <div class="work-grid">
-          {projects.map((project, index) => (
-            <a
-              href="#contact"
-              class:list={["project", project.featured && "project--featured", project.shape && `project--${project.shape}`]}
-              aria-label={`${t.work.view} ${project.name}, ${project.tags[0]}, ${project.year}`}
-              data-cursor="VIEW"
-            >
-              <div class="project-plate" style={`--plate-delay: ${Math.min(index * 70, 150)}ms`}>
-                <div class="plate-art">
-                  {project.n === "01" && (
-                    <svg viewBox="0 0 1200 520" aria-hidden="true" focusable="false">
-                      <rect width="1200" height="520" class="plate-surface" />
-                      <circle class="plate-letter" cx="170" cy="258" r="238" />
-                      <circle class="plate-line" cx="796" cy="260" r="178" />
-                      <circle class="plate-line plate-line--soft" cx="796" cy="260" r="129" />
-                      <circle class="plate-line" cx="796" cy="260" r="80" />
-                      <path class="local-contour" d="M-20 410c191-175 348-170 474-48 139 134 248 133 373 8 111-111 224-127 393-37" />
-                      <path class="plate-sweep" d="M797 82A178 178 0 0 1 958 337" />
-                      <circle class="oxide-disc" cx="1056" cy="121" r="30" />
-                      <text class="plate-coord" x="1050" y="474">F / 01 · 19.43 N</text>
-                    </svg>
-                  )}
-                  {project.n === "02" && (
-                    <svg viewBox="0 0 720 900" aria-hidden="true" focusable="false">
-                      <rect width="720" height="900" class="plate-surface plate-surface--dark" />
-                      <g class="plate-grid">
-                        <path d="M86 0v900M190 0v900M294 0v900M398 0v900M502 0v900M606 0v900" />
-                        <path d="M0 120h720M0 240h720M0 360h720M0 480h720M0 600h720M0 720h720M0 840h720" />
-                      </g>
-                      <path class="local-contour local-contour--light" d="M-24 754c101-78 159-194 232-202 93-10 111 156 199 126 86-29 81-226 176-254 68-20 112 58 173 108" />
-                      <path class="north-arrow" d="M360 130 294 346l66-38 66 38-66-216Zm0 178v267" />
-                      <circle class="oxide-disc" cx="360" cy="675" r="36" />
-                      <text class="plate-coord plate-coord--light" x="56" y="64">M / 02</text>
-                      <text class="plate-coord plate-coord--light" x="514" y="850">TRUE NORTH</text>
-                    </svg>
-                  )}
-                  {project.n === "03" && (
-                    <svg viewBox="0 0 960 600" aria-hidden="true" focusable="false">
-                      <rect width="960" height="600" class="plate-surface plate-surface--light" />
-                      <circle class="light-field" cx="486" cy="301" r="210" />
-                      <path class="aperture" d="M219 301a267 267 0 0 1 452-193M753 301a267 267 0 0 1-450 196M486 34a267 267 0 0 1 231 400M486 568A267 267 0 0 1 255 167" />
-                      <path class="local-contour" d="M-30 480c187-64 277-230 429-188 126 34 147 197 280 161 97-26 132-145 311-127" />
-                      <path class="coordinate-cross" d="M486 267v68M452 301h68" />
-                      <circle class="oxide-disc" cx="486" cy="301" r="22" />
-                      <text class="plate-coord" x="52" y="65">V / 03 · SYSTEM STUDY</text>
-                    </svg>
-                  )}
-                  {project.n === "04" && (
-                    <svg viewBox="0 0 980 620" aria-hidden="true" focusable="false">
-                      <rect width="980" height="620" class="plate-surface" />
-                      <g class="index-rules">
-                        <path d="M64 104h234M64 150h160M64 196h260M64 242h190M64 288h232" />
-                        <path d="M82 92v208M112 92v208M142 92v208" />
-                      </g>
-                      <text class="plate-number" x="576" y="568">04</text>
-                      <path class="leaf-loop local-contour" d="M371 352c88-189 259-238 374-132 98 90 32 251-119 255-151 3-204-113-131-218 61-87 169-97 226-36" />
-                      <path class="leaf-vein" d="M423 428c101-56 194-118 298-207" />
-                      <circle class="oxide-disc" cx="421" cy="429" r="26" />
-                      <text class="plate-coord" x="66" y="554">CITY INDEX / 04</text>
-                    </svg>
-                  )}
-                </div>
-              </div>
-              <div class="project-meta">
-                <span class="project-name"><span class="project-index">{project.n}</span>{project.name}</span>
-                <span class="project-tag">{project.tags[0]}</span>
-                <span class="project-year">{project.year}</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="about" id="about" aria-labelledby="about-title">
-      <p class="eyebrow reveal-text">{t.about.label}</p>
-      <h2 id="about-title" class="about-copy reveal-text" set:html={t.about.text} />
-    </section>
-
-    <section class="experience" aria-labelledby="experience-title">
-      <div class="experience-title-row reveal-text">
-        <p class="eyebrow">{t.experience.label}</p>
-        <h2 id="experience-title">{t.experience.title}</h2>
-      </div>
-      <div class="experience-head reveal-rule" aria-hidden="true">
-        <span>{t.experience.year}</span><span>{t.experience.place}</span><span>{t.experience.role}</span><span>{t.experience.location}</span>
-      </div>
-      {experience.map((entry, index) => (
-        <div class="experience-row" style={`--row-delay: ${Math.min(index * 50, 150)}ms`}>
-          <span class="experience-year">{entry.yr}</span>
-          <span class="experience-place">{entry.place}</span>
-          <span class="experience-role">{entry.role}</span>
-          <span class="experience-location">{entry.loc}</span>
-        </div>
-      ))}
-    </section>
-
-    <footer class="contact full-bleed" id="contact" data-contact>
-      <div class="contact-inner">
-        <p class="eyebrow reveal-text">{t.footer.prompt}</p>
-        <div class="contact-action">
-          <svg class="contact-orbit" viewBox="0 0 900 420" aria-hidden="true" focusable="false" data-contact-orbit>
-            <ellipse cx="450" cy="210" rx="406" ry="156" />
-            <ellipse class="contact-orbit--soft" cx="450" cy="210" rx="354" ry="126" />
-            <path d="M450 54V30M438 38h24" />
-            <circle cx="856" cy="210" r="7" />
-            <text x="76" y="353">19.4326° N / 99.1332° W</text>
+        <a class="scroll-cue" href="#work" data-cursor="VIEW">
+          <span>{t.work.action}</span>
+          <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path class="scroll-arrow" d="M24 8v29M16 29l8 8 8-8" />
+            <path class="scroll-handoff" d="M3 24h42" />
           </svg>
-          <h2 id="contact-title" class="contact-title reveal-text">{t.footer.cta}<em>{t.footer.ctaEm === "." ? t.footer.ctaEm : ` ${t.footer.ctaEm}`}</em></h2>
-          <a class="email reveal-text" href="mailto:hola@ximena.mx" data-cursor="MAIL">hola@ximena.mx</a>
+        </a>
+      </div>
+    </section>
+
+    <section
+      class="practice journey-section"
+      id="align"
+      aria-labelledby="practice-title"
+      data-journey
+      data-stage="align"
+      style="--section-progress: 1"
+    >
+      <div class="practice-scene journey-scene">
+        <div class="practice-statement">
+          <p class="eyebrow">{t.practice.label}</p>
+          <h2 id="practice-title">{t.practice.title}</h2>
+          <div class="practice-copy-mask">
+            <p set:html={t.practice.text} />
+          </div>
         </div>
-        <div class="contact-meta reveal-rule">
+
+        <div class="align-field">
+          <svg viewBox="0 0 720 720" aria-hidden="true" focusable="false">
+            <path class="align-stream align-stream--vision" d="M-30 132c174 0 183 178 340 178" />
+            <path class="align-stream align-stream--teams" d="M750 306c-190 0-216 4-440 4" />
+            <path class="align-stream align-stream--timelines" d="M210 754c0-213 100-272 100-444" />
+            <path class="align-route" pathLength="1" d="M310 310c93 0 123 63 188 63h222" />
+            <circle class="align-node" cx="310" cy="310" r="11" />
+            <circle class="align-node-ring" cx="310" cy="310" r="23" />
+            <circle class="align-endpoint" cx="510" cy="373" r="8" />
+          </svg>
+          <span class="align-label align-label--vision">{t.journey.align.vision}</span>
+          <span class="align-label align-label--teams">{t.journey.align.teams}</span>
+          <span class="align-label align-label--timelines">{t.journey.align.timelines}</span>
+          <span class="align-label align-label--delivery">{t.journey.align.delivery}</span>
+
+          <div class="current">
+            <span class="eyebrow">{t.currently.label}</span>
+            <p>{t.currently.text}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="work-band full-bleed journey-section"
+      id="work"
+      aria-labelledby="work-title"
+      data-journey
+      data-stage="navigate"
+      style="--section-progress: 1"
+    >
+      <div class="work-scene journey-scene">
+        <aside class="work-navigation">
+          <p class="eyebrow">{t.work.label}</p>
+          <h2 id="work-title">{t.work.title} <em>{t.work.titleEm}</em></h2>
+          <div class="waypoint-index" aria-hidden="true">
+            <svg viewBox="0 0 48 360" focusable="false">
+              <path class="waypoint-route" pathLength="1" d="M24 18V342" />
+              {projects.map((project, index) => <circle data-waypoint-node={index} cx="24" cy={42 + index * 92} r="6" />)}
+            </svg>
+            <div>
+              {projects.map((project, index) => <span data-waypoint-label={index}>{project.n}</span>)}
+            </div>
+          </div>
+        </aside>
+
+        <ol class="project-theatre">
+          {projects.map((project, index) => (
+            <li>
+              <a
+                href="#contact"
+                class="project-card"
+                data-project={index}
+                aria-label={`${t.work.view} ${project.name}, ${project.tag}, ${project.year}`}
+                data-cursor="VIEW"
+              >
+                <div class="project-plate">
+                  <div class="plate-art">
+                    {project.n === "01" && (
+                      <svg viewBox="0 0 1200 680" aria-hidden="true" focusable="false">
+                        <rect width="1200" height="680" class="plate-surface" />
+                        <circle class="plate-letter" cx="174" cy="338" r="294" />
+                        <circle class="plate-line" cx="810" cy="340" r="216" />
+                        <circle class="plate-line plate-line--soft" cx="810" cy="340" r="154" />
+                        <circle class="plate-line" cx="810" cy="340" r="92" />
+                        <path class="local-contour" d="M-20 540c191-175 348-170 474-48 139 134 248 133 373 8 111-111 224-127 393-37" />
+                        <path class="plate-sweep" d="M811 124A216 216 0 0 1 1003 437" />
+                        <circle class="oxide-disc" cx="1066" cy="142" r="32" />
+                        <text class="plate-coord" x="1018" y="624">F / 01 · 19.43 N</text>
+                      </svg>
+                    )}
+                    {project.n === "02" && (
+                      <svg viewBox="0 0 1200 680" aria-hidden="true" focusable="false">
+                        <rect width="1200" height="680" class="plate-surface plate-surface--dark" />
+                        <g class="plate-grid">
+                          <path d="M130 0v680M310 0v680M490 0v680M670 0v680M850 0v680M1030 0v680" />
+                          <path d="M0 110h1200M0 220h1200M0 330h1200M0 440h1200M0 550h1200" />
+                        </g>
+                        <path class="local-contour local-contour--light" d="M-24 578c171-100 251-226 370-206 120 20 136 176 283 122 133-48 169-240 320-228 95 8 135 91 275 97" />
+                        <path class="north-arrow" d="M600 102 521 358l79-46 79 46-79-256Zm0 210v244" />
+                        <circle class="oxide-disc" cx="600" cy="548" r="30" />
+                        <text class="plate-coord plate-coord--light" x="58" y="65">M / 02</text>
+                        <text class="plate-coord plate-coord--light" x="984" y="626">TRUE NORTH</text>
+                      </svg>
+                    )}
+                    {project.n === "03" && (
+                      <svg viewBox="0 0 1200 680" aria-hidden="true" focusable="false">
+                        <rect width="1200" height="680" class="plate-surface plate-surface--light" />
+                        <circle class="light-field" cx="600" cy="340" r="244" />
+                        <path class="aperture" d="M290 340a310 310 0 0 1 525-224M910 340a310 310 0 0 1-523 227M600 30a310 310 0 0 1 268 465M600 650A310 310 0 0 1 332 185" />
+                        <path class="local-contour" d="M-30 542c187-64 277-230 429-188 126 34 147 197 280 161 138-37 202-199 551-99" />
+                        <path class="coordinate-cross" d="M600 300v80M560 340h80" />
+                        <circle class="oxide-disc" cx="600" cy="340" r="24" />
+                        <text class="plate-coord" x="54" y="67">V / 03 · SYSTEM STUDY</text>
+                      </svg>
+                    )}
+                    {project.n === "04" && (
+                      <svg viewBox="0 0 1200 680" aria-hidden="true" focusable="false">
+                        <rect width="1200" height="680" class="plate-surface" />
+                        <g class="index-rules">
+                          <path d="M70 104h284M70 150h194M70 196h310M70 242h234M70 288h278" />
+                          <path d="M88 92v208M122 92v208M156 92v208" />
+                        </g>
+                        <text class="plate-number" x="718" y="630">04</text>
+                        <path class="leaf-loop local-contour" d="M430 394c98-209 295-263 425-145 110 100 35 279-137 285-170 5-231-123-149-240 69-98 191-109 257-40" />
+                        <path class="leaf-vein" d="M488 478c115-64 219-132 338-224" />
+                        <circle class="oxide-disc" cx="487" cy="478" r="28" />
+                        <text class="plate-coord" x="70" y="622">CITY INDEX / 04</text>
+                      </svg>
+                    )}
+                  </div>
+                </div>
+                <div class="project-meta">
+                  <span class="project-name"><span>{project.n}</span>{project.name}</span>
+                  <span>{project.tag}</span>
+                  <span>{project.year}</span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section
+      class="about journey-section"
+      id="about"
+      aria-labelledby="about-title"
+      data-journey
+      data-stage="reveal"
+      style="--section-progress: 1"
+    >
+      <div class="about-scene journey-scene">
+        <p class="eyebrow">{t.about.label}</p>
+        <div class="about-lens">
+          <h2 id="about-title" class="about-copy" set:html={t.about.text} />
+          <div class="about-mask about-mask--left" aria-hidden="true"></div>
+          <div class="about-mask about-mask--right" aria-hidden="true"></div>
+          <span class="about-seam" aria-hidden="true"></span>
+        </div>
+        <svg class="about-exit" viewBox="0 0 1000 110" aria-hidden="true" focusable="false">
+          <path pathLength="1" d="M0 78c191-62 311-58 451-6 154 57 293 44 549-37" />
+        </svg>
+      </div>
+    </section>
+
+    <section
+      class="experience journey-section"
+      id="trace"
+      aria-labelledby="experience-title"
+      data-journey
+      data-stage="trace"
+      style="--section-progress: 1"
+    >
+      <div class="trace-scene journey-scene">
+        <div class="experience-title-row">
+          <p class="eyebrow">{t.experience.label}</p>
+          <h2 id="experience-title">{t.experience.title}</h2>
+        </div>
+
+        <div class="trace-body">
+          <svg class="trace-route" viewBox="0 0 80 520" aria-hidden="true" focusable="false">
+            <path class="trace-route__base" d="M40 470V50" />
+            <path class="trace-route__progress" pathLength="1" d="M40 470V50" />
+            <circle data-trace-node="3" cx="40" cy="458" r="7" />
+            <circle data-trace-node="2" cx="40" cy="326" r="7" />
+            <circle data-trace-node="1" cx="40" cy="194" r="7" />
+            <circle data-trace-node="0" cx="40" cy="62" r="7" />
+            <circle class="trace-current-ring" cx="40" cy="62" r="17" />
+          </svg>
+
+          <ol class="experience-list">
+            {experience.map((entry, index) => (
+              <li class="experience-row" data-experience={index}>
+                <span class="experience-year">{entry.yr}</span>
+                <span class="experience-place">{entry.place}</span>
+                <span class="experience-role">{entry.role}</span>
+                <span class="experience-location">{entry.loc}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <footer
+      class="contact full-bleed journey-section"
+      id="contact"
+      data-contact
+      data-journey
+      data-stage="arrive"
+      style="--section-progress: 1"
+    >
+      <div class="contact-scene journey-scene">
+        <p class="eyebrow">{t.footer.prompt}</p>
+        <div class="contact-action">
+          <svg class="arrival-field" viewBox="0 0 1200 620" aria-hidden="true" focusable="false">
+            <path class="arrival-strand arrival-strand--one" pathLength="1" d="M-30 96c220 0 271 112 438 214" />
+            <path class="arrival-strand arrival-strand--two" pathLength="1" d="M1230 100c-240 14-282 116-438 210" />
+            <path class="arrival-strand arrival-strand--three" pathLength="1" d="M-30 562c216-23 279-135 438-252" />
+            <path class="arrival-strand arrival-strand--four" pathLength="1" d="M1230 570c-244-17-293-148-438-260" />
+            <ellipse class="arrival-orbit" pathLength="1" cx="600" cy="310" rx="438" ry="194" />
+            <ellipse class="arrival-orbit arrival-orbit--soft" pathLength="1" cx="600" cy="310" rx="376" ry="154" />
+            <path class="arrival-tick" d="M600 116V86M586 96h28" />
+            <circle class="arrival-endpoint" cx="970" cy="426" r="8" />
+            <text x="165" y="530">19.4326° N / 99.1332° W</text>
+          </svg>
+          <h2 class="contact-title">{t.footer.cta}<em>{t.footer.ctaEm === "." ? t.footer.ctaEm : ` ${t.footer.ctaEm}`}</em></h2>
+          <a class="email" href="mailto:hola@ximena.mx" data-cursor="MAIL">hola@ximena.mx</a>
+        </div>
+        <div class="contact-meta">
           <span>{t.footer.copyright}</span>
           <span>{t.footer.coords}</span>
           <span>{t.footer.status}</span>
@@ -249,9 +365,7 @@ const experience = [
     transition: transform var(--fast) var(--ease);
   }
 
-  .skip-link:focus {
-    transform: translateY(0);
-  }
+  .skip-link:focus { transform: translateY(0); }
 
   .atmosphere {
     position: fixed;
@@ -281,59 +395,59 @@ const experience = [
     background: radial-gradient(circle, rgba(23, 26, 22, 0.22), rgba(23, 26, 22, 0) 70%);
   }
 
-  .grain {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.028;
-    mix-blend-mode: multiply;
-  }
+  .grain { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.028; mix-blend-mode: multiply; }
 
-  .living-contour {
+  .journey-handoff {
     position: absolute;
-    top: clamp(90px, 10vw, 160px);
+    top: 88px;
     left: 50%;
     width: max(1024px, 108vw);
     height: auto;
-    transform: translateX(-50%);
+    fill: none;
     stroke: var(--text);
     stroke-width: 1.25;
     stroke-linecap: round;
-    vector-effect: non-scaling-stroke;
-    opacity: 0.34;
+    opacity: 0.18;
+    transform: translateX(-50%);
     mix-blend-mode: multiply;
   }
 
-  .contour-path {
-    stroke-dasharray: 1;
-    stroke-dashoffset: calc(1 - var(--contour-progress));
-  }
+  .journey-handoff path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .journey-handoff__oxide { stroke: var(--accent); }
+  :global(.js.journey-ready) .journey-handoff path { stroke-dashoffset: calc(1 - var(--page-progress)); }
 
-  .contour-path--soft { opacity: 0.36; }
-  .contour-path--oxide { stroke: var(--accent); opacity: 0.8; }
-  .living-contour circle:first-of-type { fill: var(--accent); stroke: none; }
-  .living-contour circle:last-of-type { opacity: 0.45; }
-
-  .progress-rail {
+  .journey-rail {
+    display: none;
     position: fixed;
     z-index: 40;
-    top: 0;
-    right: 9px;
-    bottom: 0;
-    width: 1px;
-    background: rgba(20, 23, 19, 0.16);
+    top: 50%;
+    right: 16px;
+    gap: 16px;
     pointer-events: none;
+    transform: translateY(-50%);
   }
 
-  .progress-rail span {
-    display: block;
-    width: 2px;
-    height: 100%;
-    background: var(--accent);
-    transform: scaleY(var(--page-progress));
-    transform-origin: top;
+  .journey-rail__stage {
+    display: grid;
+    grid-template-columns: auto 12px;
+    align-items: center;
+    gap: 10px;
+    color: var(--subtle);
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
   }
+
+  .journey-rail__stage i {
+    width: 9px;
+    height: 9px;
+    border: 1px solid currentColor;
+    border-radius: 9999px;
+  }
+
+  .journey-rail__stage.is-active { color: var(--accent); }
+  .journey-rail__stage.is-active i { background: var(--accent); }
+  .journey-rail__stage.is-complete { color: var(--muted); }
 
   .custom-cursor {
     display: none;
@@ -346,9 +460,9 @@ const experience = [
     border: 1px solid var(--text);
     border-radius: 9999px;
     pointer-events: none;
+    opacity: 0;
     transform: translate3d(var(--cursor-x, -60px), var(--cursor-y, -60px), 0) translate(-50%, -50%) scale(var(--cursor-scale, 1));
     transition: transform var(--base) var(--ease), opacity var(--fast) linear;
-    opacity: 0;
   }
 
   .cursor-core {
@@ -390,18 +504,13 @@ const experience = [
 
   .top {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     min-height: 48px;
+    align-items: center;
+    justify-content: space-between;
     font-size: 13px;
   }
 
-  .top-right {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-  }
-
+  .top-right { display: flex; align-items: center; gap: 24px; }
   .mark { font-size: 16px; font-weight: 560; letter-spacing: -0.02em; }
 
   .status {
@@ -423,22 +532,28 @@ const experience = [
     animation: availability 2.4s ease-in-out infinite;
   }
 
-  @keyframes availability {
-    50% { box-shadow: 0 0 0 7px rgba(63, 125, 79, 0); }
+  @keyframes availability { 50% { box-shadow: 0 0 0 7px rgba(63, 125, 79, 0); } }
+
+  .journey-section { position: relative; }
+  .journey-scene { position: relative; }
+  .full-bleed { width: 100vw; margin-left: calc(50% - 50vw); }
+
+  .eyebrow {
+    margin: 0;
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.11em;
+    line-height: 1.4;
+    text-transform: uppercase;
   }
 
-  .hero {
-    position: relative;
-    min-height: min(850px, calc(100vh - 88px));
-    padding-top: clamp(72px, 10vh, 128px);
-    isolation: isolate;
-  }
+  .hero { min-height: min(850px, calc(100vh - 88px)); }
+  .hero-scene { min-height: min(850px, calc(100vh - 88px)); padding-top: clamp(72px, 10vh, 128px); isolation: isolate; }
 
   .hero h1 {
     position: relative;
     z-index: 2;
     margin: 0;
-    font-family: var(--ff-display);
     font-size: clamp(72px, 14vw, 214px);
     font-stretch: 72%;
     font-weight: 510;
@@ -446,40 +561,13 @@ const experience = [
     letter-spacing: -0.055em;
   }
 
-  .hero-line {
-    display: flex;
-    width: 100%;
-    align-items: baseline;
-    gap: 0.18em;
-    overflow: hidden;
-  }
-
-  .hero-line-inner {
-    display: inline-block;
-    transition: transform var(--sequence) var(--ease), opacity var(--emphasis) var(--ease);
-  }
-
-  :global(.js:not(.hero-ready)) .hero-line-inner {
-    opacity: 0;
-    transform: translateY(115%);
-  }
-
-  :global(.js.hero-ready) .hero-line--two .hero-line-inner { transition-delay: 80ms; }
-  :global(.js.hero-ready) .hero-line--three .hero-line-inner { transition-delay: 160ms; }
-  :global(.js.hero-ready) .hero-line--four .hero-line-inner { transition-delay: 240ms; }
-
-  .hero-line--two,
-  .hero-line--four { justify-content: flex-end; }
-
+  .hero-line { display: flex; width: 100%; align-items: baseline; gap: 0.18em; }
+  .hero-line--two, .hero-line--four { justify-content: flex-end; }
   .hero-line em,
-  .work-head em,
+  .work-navigation em,
   .about-copy em,
   .contact-title em,
-  .practice-copy em {
-    font-family: var(--ff-editorial);
-    font-style: italic;
-    font-weight: 400;
-  }
+  .practice-copy-mask em { font-family: var(--ff-editorial); font-style: italic; font-weight: 400; }
 
   .practice-pill {
     padding: 11px 18px;
@@ -492,23 +580,30 @@ const experience = [
     letter-spacing: 0;
     line-height: 1;
     white-space: nowrap;
-    transform: translateY(-0.45em);
   }
 
-  .hero-orbit {
+  .orient-field {
     position: absolute;
     z-index: 1;
-    top: 6%;
-    right: -2%;
-    width: clamp(200px, 29vw, 440px);
+    top: 2%;
+    left: 50%;
+    width: max(900px, 88vw);
+    max-width: 1280px;
     overflow: visible;
-    color: var(--text);
-    transform: translate3d(var(--hero-x, 0), var(--hero-y, 0), 0) rotate(-12deg);
-    transition: transform var(--emphasis) var(--ease);
+    transform: translateX(-50%) translate(var(--pointer-x, 0), var(--pointer-y, 0));
+    mix-blend-mode: multiply;
   }
 
-  .hero-orbit-ring { fill: none; stroke: currentColor; stroke-width: 1.2; }
-  .hero-orbit-core { fill: var(--accent); stroke: none; }
+  .orient-field path,
+  .orient-field ellipse,
+  .orient-field circle { vector-effect: non-scaling-stroke; }
+  .orient-ticks { fill: none; stroke: var(--text); stroke-width: 1; opacity: 0.34; }
+  .orient-path { fill: none; stroke: var(--text); stroke-width: 1.35; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .orient-resolved { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .orient-beacon { transform: translate(600px, 350px); }
+  .orient-beacon circle:first-child { fill: var(--accent); }
+  .orient-beacon-ring { fill: none; stroke: var(--accent); opacity: 0.42; }
+  .orient-compass { fill: none; stroke: var(--text); stroke-width: 1.2; transform-origin: 600px 350px; }
 
   .scroll-cue {
     position: absolute;
@@ -516,11 +611,11 @@ const experience = [
     bottom: 40px;
     left: 0;
     display: inline-flex;
+    min-width: 188px;
+    min-height: 48px;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    min-width: 188px;
-    min-height: 48px;
     border-bottom: 1px solid var(--text);
     font-family: var(--ff-mono);
     font-size: 11px;
@@ -529,152 +624,121 @@ const experience = [
   }
 
   .scroll-cue svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.4; }
-  .scroll-cue:hover svg,
-  .scroll-cue:focus-visible svg { transform: translateY(4px); transition: transform var(--base) var(--ease); }
+  .scroll-handoff { opacity: 0; }
 
-  .eyebrow {
-    margin: 0;
-    font-family: var(--ff-mono);
-    font-size: 11px;
-    letter-spacing: 0.11em;
-    line-height: 1.4;
-    text-transform: uppercase;
-  }
-
-  .practice {
-    display: grid;
-    grid-template-columns: minmax(220px, 0.62fr) minmax(420px, 1.38fr);
-    gap: clamp(40px, 8vw, 128px);
-    padding: 128px 0 160px;
-  }
-
-  .practice-label h2 {
+  .practice { padding: 128px 0 160px; }
+  .practice-scene { display: grid; grid-template-columns: minmax(300px, 0.9fr) minmax(480px, 1.1fr); gap: clamp(48px, 7vw, 112px); }
+  .practice-statement { padding-top: 48px; }
+  .practice-statement h2 {
+    max-width: 11ch;
     margin: 40px 0 0;
-    font-size: clamp(28px, 3vw, 40px);
+    font-size: clamp(40px, 5vw, 64px);
     font-stretch: 80%;
     font-weight: 480;
-    line-height: 1.04;
-    letter-spacing: -0.04em;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
   }
 
-  .practice-copy > p {
-    max-width: 68ch;
-    margin: 40px 0 0;
+  .practice-copy-mask { overflow: hidden; }
+  .practice-copy-mask p {
+    max-width: 52ch;
+    margin: 64px 0 0;
     color: var(--muted);
-    font-size: clamp(20px, 2.1vw, 28px);
+    font-size: clamp(20px, 2vw, 28px);
     font-weight: 380;
-    letter-spacing: -0.022em;
     line-height: 1.42;
+    letter-spacing: -0.022em;
     text-wrap: pretty;
   }
 
-  .reveal-rule { height: 1px; background: currentColor; opacity: 0.34; transform-origin: left; }
+  .align-field { position: relative; min-height: 680px; border-left: 1px solid rgba(77, 84, 74, 0.3); }
+  .align-field svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .align-stream { fill: none; stroke: var(--text); stroke-width: 1.3; stroke-linecap: round; opacity: 0.58; }
+  .align-stream--teams { stroke: var(--border); }
+  .align-stream--timelines { stroke-dasharray: 5 8; }
+  .align-route { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .align-node { fill: var(--accent); }
+  .align-node-ring { fill: none; stroke: var(--accent); opacity: 0.45; }
+  .align-endpoint { fill: var(--accent); }
+
+  .align-label {
+    position: absolute;
+    color: var(--muted);
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .align-label--vision { top: 14%; left: 3%; }
+  .align-label--teams { top: 40%; right: 2%; }
+  .align-label--timelines { bottom: 6%; left: 22%; }
+  .align-label--delivery { top: 55%; right: 2%; color: var(--text); }
 
   .current {
+    position: absolute;
+    right: 2%;
+    bottom: 9%;
     display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 24px;
-    max-width: 68ch;
-    margin-top: 64px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(20, 23, 19, 0.22);
+    width: min(420px, 82%);
+    grid-template-columns: 112px 1fr;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(20, 23, 19, 0.24);
   }
 
   .current p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; text-wrap: pretty; }
 
-  .full-bleed { width: 100vw; margin-left: calc(50% - 50vw); }
-
-  .work-band {
-    position: relative;
-    background: var(--inverse);
-    color: var(--text-inverse);
-  }
-
-  .band-inner,
-  .contact-inner {
-    width: 100%;
+  .work-band { min-height: auto; background: var(--inverse); color: var(--text-inverse); }
+  .work-scene {
+    display: grid;
     max-width: var(--content-max);
     margin: 0 auto;
-    padding-inline: var(--page-pad);
+    padding: 112px var(--page-pad) 128px;
+    grid-template-columns: minmax(190px, 0.28fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 80px);
   }
 
-  .band-inner { padding-top: 128px; padding-bottom: 160px; }
-
-  .work-head {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: end;
-    gap: 24px;
-  }
-
-  .work-head .eyebrow { color: var(--subtle); }
-
-  .work-head h2 {
-    margin: 0;
-    font-size: clamp(40px, 6vw, 80px);
+  .work-navigation h2 {
+    margin: 28px 0 0;
+    font-size: clamp(40px, 5vw, 64px);
     font-stretch: 82%;
     font-weight: 460;
-    letter-spacing: -0.045em;
     line-height: 0.95;
-    text-wrap: balance;
+    letter-spacing: -0.045em;
   }
 
-  .work-rule { grid-column: 1 / -1; margin-top: 16px; background: var(--text-inverse); }
+  .work-navigation .eyebrow { color: #aeb5aa; }
+  .waypoint-index { display: flex; height: 360px; margin-top: 64px; gap: 16px; color: #aeb5aa; }
+  .waypoint-index svg { width: 48px; height: 360px; overflow: visible; }
+  .waypoint-route { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .waypoint-index circle { fill: var(--inverse); stroke: #aeb5aa; stroke-width: 1.5; }
+  .waypoint-index circle.is-active { fill: var(--accent); stroke: var(--accent); }
+  .waypoint-index circle.is-complete { stroke: var(--accent); }
+  .waypoint-index > div { display: grid; padding: 33px 0; grid-template-rows: repeat(4, 1fr); }
+  .waypoint-index span { font-family: var(--ff-mono); font-size: 11px; }
+  .waypoint-index span.is-active { color: var(--accent); }
 
-  .work-grid {
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: clamp(64px, 8vw, 128px) clamp(16px, 3vw, 48px);
-    margin-top: 80px;
-  }
-
-  .project { grid-column: span 6; min-width: 0; }
-  .project--featured { grid-column: 1 / -1; }
-  .project--portrait { grid-column: 1 / span 5; }
-  .project--landscape { grid-column: 7 / -1; align-self: center; }
-  .project--offset { grid-column: 3 / span 8; }
-
-  .project-plate {
-    position: relative;
-    aspect-ratio: 16 / 10;
-    overflow: hidden;
-    background: var(--surface);
-    clip-path: inset(0 0 0 0);
-    transition: clip-path var(--sequence) var(--ease), transform var(--emphasis) var(--ease);
-    transition-delay: var(--plate-delay, 0ms);
-  }
-
-  .project--featured .project-plate { aspect-ratio: 21 / 9; }
-  .project--portrait .project-plate { aspect-ratio: 4 / 5; }
-
-  .plate-art {
-    width: 100%;
-    height: 100%;
-    transform: translateY(0) scale(1);
-    transition: transform var(--emphasis) var(--ease);
-  }
-
+  .project-theatre { position: relative; min-width: 0; margin: 0; padding: 0; list-style: none; }
+  .project-theatre > li + li { margin-top: 96px; }
+  .project-card { display: block; min-width: 0; }
+  .project-plate { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); }
+  .plate-art { width: 100%; height: 100%; transition: transform var(--emphasis) var(--ease); }
   .plate-art svg { display: block; width: 100%; height: 100%; }
   .plate-surface { fill: var(--surface); }
   .plate-surface--dark { fill: #242821; }
   .plate-surface--light { fill: var(--elevated); }
-  .plate-line,
-  .local-contour,
-  .aperture,
-  .coordinate-cross,
-  .index-rules,
-  .leaf-vein {
+  .plate-line, .local-contour, .aperture, .coordinate-cross, .index-rules, .leaf-vein {
     fill: none;
     stroke: var(--text);
     stroke-width: 1.5;
     stroke-linecap: round;
     vector-effect: non-scaling-stroke;
   }
-
-  .plate-letter { fill: none; stroke: var(--text); stroke-width: 108; }
+  .plate-letter { fill: none; stroke: var(--text); stroke-width: 118; }
   .plate-line--soft { opacity: 0.36; }
   .plate-sweep { fill: none; stroke: var(--accent); stroke-width: 24; stroke-linecap: round; }
-  .oxide-disc { fill: var(--accent); transform-box: fill-box; transform-origin: center; transform: scale(0.72); transition: transform var(--emphasis) var(--ease); }
+  .oxide-disc { fill: var(--accent); transform-box: fill-box; transform-origin: center; transition: transform var(--emphasis) var(--ease); }
   .plate-coord { fill: var(--muted); font-family: var(--ff-mono); font-size: 13px; letter-spacing: 0.12em; }
   .plate-coord--light { fill: var(--text-inverse); }
   .plate-grid { fill: none; stroke: var(--text-inverse); stroke-width: 1; opacity: 0.16; }
@@ -684,164 +748,102 @@ const experience = [
   .aperture { stroke-width: 3; }
   .coordinate-cross { stroke-width: 2; }
   .index-rules { opacity: 0.5; }
-  .plate-number { fill: var(--text); font-family: var(--ff-editorial); font-size: 430px; font-style: italic; opacity: 0.1; }
-  .leaf-loop { stroke-width: 2; }
+  .plate-number { fill: var(--text); font-family: var(--ff-editorial); font-size: 460px; font-style: italic; opacity: 0.1; }
 
   .project-meta {
-    position: relative;
     display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 24px;
-    align-items: baseline;
     min-height: 64px;
     padding-top: 18px;
+    grid-template-columns: 1fr auto auto;
+    align-items: baseline;
+    gap: 24px;
+    border-top: 1px solid transparent;
   }
 
-  .project-meta::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--emphasis) var(--ease);
+  .project-meta > span:not(.project-name), .project-name > span {
+    color: #aeb5aa;
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
   }
-
   .project-name { display: flex; gap: 16px; font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.025em; }
-  .project-index,
-  .project-tag,
-  .project-year { color: #aeb5aa; font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.04em; }
-  .project-index { padding-top: 7px; }
+  .project-card:hover .plate-art, .project-card:focus-visible .plate-art { transform: translateY(-8px) scale(1.025); }
+  .project-card:hover .project-meta, .project-card:focus-visible .project-meta { border-color: var(--accent); }
 
-  .project:hover .plate-art,
-  .project:focus-visible .plate-art { transform: translateY(-8px) scale(1.025); }
-  .project:hover .local-contour,
-  .project:focus-visible .local-contour { transform: translateX(8px); transition: transform var(--emphasis) var(--ease); }
-  .project:hover .oxide-disc,
-  .project:focus-visible .oxide-disc { transform: scale(1); }
-  .project:hover .project-meta::before,
-  .project:focus-visible .project-meta::before { transform: scaleX(1); }
-
-  .about {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: clamp(32px, 6vw, 96px);
-    padding: 160px 0 128px;
-  }
-
+  .about { min-height: auto; padding: 160px 0; }
+  .about-scene { min-height: 620px; display: grid; grid-template-columns: 180px 1fr; gap: clamp(32px, 6vw, 96px); align-content: center; }
+  .about-lens { position: relative; overflow: hidden; }
   .about-copy {
-    max-width: 920px;
+    max-width: 960px;
     margin: 0;
     font-size: clamp(28px, 4.2vw, 64px);
     font-stretch: 82%;
     font-weight: 380;
-    letter-spacing: -0.04em;
     line-height: 1.12;
+    letter-spacing: -0.04em;
     text-wrap: balance;
   }
+  .about-copy em { color: var(--accent); }
+  .about-mask { display: none; position: absolute; z-index: 2; top: 0; bottom: 0; width: 52%; background: rgba(196, 204, 191, 0.76); pointer-events: none; }
+  .about-mask--left { left: 0; }
+  .about-mask--right { right: 0; }
+  .about-seam { display: none; position: absolute; z-index: 3; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--accent); }
+  .about-exit { grid-column: 2; width: 100%; margin-top: 64px; fill: none; stroke: var(--accent); stroke-width: 1.5; }
+  .about-exit path { stroke-dasharray: 1; stroke-dashoffset: 0; }
 
-  .experience { padding-bottom: 160px; }
-
-  .experience-title-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-bottom: 48px;
-  }
-
+  .experience { padding: 128px 0 160px; }
+  .experience-title-row { display: flex; justify-content: space-between; align-items: end; margin-bottom: 48px; }
   .experience-title-row h2 { margin: 0; font-size: clamp(28px, 3vw, 40px); font-weight: 450; letter-spacing: -0.035em; }
-
-  .experience-head,
+  .trace-body { display: grid; grid-template-columns: 80px 1fr; gap: 24px; }
+  .trace-route { width: 80px; height: 520px; overflow: visible; }
+  .trace-route__base, .trace-route__progress { fill: none; stroke: var(--border); stroke-width: 1.5; }
+  .trace-route__progress { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .trace-route circle { fill: var(--accent); stroke: var(--accent); stroke-width: 1.5; }
+  .trace-route circle.is-traced { fill: var(--accent); stroke: var(--accent); }
+  .trace-current-ring { fill: none !important; stroke: var(--accent) !important; opacity: 0.55; }
+  .experience-list { margin: 0; padding: 0; list-style: none; }
   .experience-row {
     display: grid;
+    min-height: 130px;
+    padding: 40px 0;
     grid-template-columns: 110px 1fr 1fr minmax(140px, 220px);
-    gap: 24px;
-  }
-
-  .experience-head {
-    height: auto;
-    padding-bottom: 16px;
-    opacity: 1;
-    color: var(--muted);
-    background: none;
-    font-family: var(--ff-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .experience-head span:last-child,
-  .experience-location { text-align: right; }
-
-  .experience-row {
-    position: relative;
     align-items: baseline;
-    min-height: 88px;
-    padding: 30px 0;
+    gap: 24px;
     border-bottom: 1px solid rgba(77, 84, 74, 0.34);
+    color: var(--text);
   }
-
-  .experience-row::after {
-    content: "";
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--emphasis) var(--ease);
-  }
-
-  .experience-row:hover::after,
-  .experience-row:focus-within::after { transform: scaleX(1); }
-  .experience-year,
-  .experience-location { color: var(--muted); font-family: var(--ff-mono); font-size: 11px; }
+  .experience-year, .experience-location { color: var(--muted); font-family: var(--ff-mono); font-size: 11px; }
   .experience-place { font-size: 20px; letter-spacing: -0.02em; }
   .experience-role { color: var(--muted); font-size: 13px; }
+  .experience-location { text-align: right; }
 
-  .contact {
-    position: relative;
-    overflow: hidden;
-    background: var(--inverse);
-    color: var(--text-inverse);
-  }
-
-  .contact-inner { padding-top: 96px; padding-bottom: 32px; }
+  .contact { min-height: auto; overflow: clip; background: var(--inverse); color: var(--text-inverse); }
+  .contact-scene { max-width: var(--content-max); margin: 0 auto; padding: 96px var(--page-pad) 32px; }
   .contact .eyebrow { color: #aeb5aa; }
-
   .contact-action {
     position: relative;
     display: flex;
-    min-height: clamp(440px, 56vw, 680px);
+    min-height: clamp(520px, 64vw, 760px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-
-  .contact-orbit {
+  .arrival-field {
     position: absolute;
-    left: 50%;
     top: 50%;
-    width: min(900px, 90vw);
+    left: 50%;
+    width: min(1100px, 96vw);
     overflow: visible;
     fill: none;
     stroke: var(--text-inverse);
     stroke-width: 1.2;
-    transform: translate(-50%, -50%) rotate(var(--contact-rotation, 0deg));
-    transform-origin: center;
-    opacity: 0.7;
+    transform: translate(-50%, -50%);
   }
-
-  .contact-orbit--soft { opacity: 0.3; }
-  .contact-orbit circle { fill: var(--accent); stroke: none; }
-  .contact-orbit text { fill: #7d8678; stroke: none; font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.12em; }
-
+  .arrival-strand, .arrival-orbit { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .arrival-orbit--soft { opacity: 0.3; }
+  .arrival-tick { opacity: 0.6; }
+  .arrival-endpoint { fill: var(--accent); stroke: none; }
+  .arrival-field text { fill: #7d8678; stroke: none; font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.12em; }
   .contact-title {
     position: relative;
     z-index: 2;
@@ -849,24 +851,22 @@ const experience = [
     font-size: clamp(72px, 14vw, 214px);
     font-stretch: 72%;
     font-weight: 500;
-    letter-spacing: -0.055em;
     line-height: 0.86;
+    letter-spacing: -0.055em;
     text-align: center;
     text-wrap: balance;
   }
-
   .email {
     position: relative;
     z-index: 3;
     display: inline-flex;
-    align-items: center;
     min-height: 48px;
     margin-top: 48px;
+    align-items: center;
     overflow: hidden;
     font-size: clamp(16px, 2vw, 28px);
     letter-spacing: -0.02em;
   }
-
   .email::after {
     content: "";
     position: absolute;
@@ -875,146 +875,235 @@ const experience = [
     left: 0;
     height: 1px;
     background: var(--accent);
-    transform: translateX(-102%);
-    transition: transform var(--emphasis) var(--ease);
+    transform: scaleX(1);
+    transform-origin: left;
   }
-
-  .email:hover::after,
-  .email:focus-visible::after { transform: translateX(0); }
-
   .contact-meta {
     display: flex;
-    height: auto;
     justify-content: space-between;
     gap: 16px;
     padding-top: 24px;
     border-top: 1px solid rgba(233, 237, 230, 0.26);
-    background: none;
     color: #aeb5aa;
     font-family: var(--ff-mono);
     font-size: 11px;
   }
 
-  :global(.js) .reveal-text,
-  :global(.js) .experience-row {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity var(--sequence) var(--ease), transform var(--sequence) var(--ease);
+  @media (min-width: 1024px) {
+    .journey-rail { display: grid; }
+
+    :global(.js.journey-ready) .hero { min-height: 180vh; min-height: 180svh; }
+    :global(.js.journey-ready) .hero-scene { position: sticky; top: 0; height: 100vh; height: 100svh; }
+    :global(.js.journey-ready) .hero-line--one { transform: translateX(calc((1 - var(--section-progress)) * 30px)); }
+    :global(.js.journey-ready) .hero-line--two { transform: translateX(calc((1 - var(--section-progress)) * -42px)); }
+    :global(.js.journey-ready) .hero-line--three { transform: translateX(calc((1 - var(--section-progress)) * 26px)); }
+    :global(.js.journey-ready) .hero-line--four { transform: translateX(calc((1 - var(--section-progress)) * -22px)); }
+    :global(.js.journey-ready) .orient-path { stroke-dashoffset: calc(1 - var(--section-progress)); }
+    :global(.js.journey-ready) .orient-resolved { stroke-dashoffset: calc(1 - max(0, (var(--section-progress) - 0.65) / 0.35)); }
+    :global(.js.journey-ready) .orient-compass { transform: rotate(calc(-9deg + var(--section-progress) * 18deg)); }
+    :global(.js.journey-ready) .orient-beacon { transform: translate(calc(600px + (1 - var(--section-progress)) * 164px), calc(350px + (1 - var(--section-progress)) * -112px)); }
+    :global(.js.journey-ready) .scroll-arrow { opacity: calc(1 - var(--section-progress)); }
+    :global(.js.journey-ready) .scroll-handoff { opacity: var(--section-progress); }
+
+    :global(.js.journey-ready) .practice { min-height: 190vh; min-height: 190svh; padding: 0; }
+    :global(.js.journey-ready) .practice-scene {
+      position: sticky;
+      top: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      align-items: center;
+    }
+    :global(.js.journey-ready) .align-stream--vision { transform: translate(calc((1 - var(--section-progress)) * -150px), calc((1 - var(--section-progress)) * -70px)); }
+    :global(.js.journey-ready) .align-stream--teams { transform: translateX(calc((1 - var(--section-progress)) * 170px)); }
+    :global(.js.journey-ready) .align-stream--timelines { transform: translateY(calc((1 - var(--section-progress)) * 160px)); }
+    :global(.js.journey-ready) .align-route { stroke-dashoffset: calc(1 - var(--section-progress)); }
+    :global(.js.journey-ready) .align-endpoint,
+    :global(.js.journey-ready) .align-label--delivery { opacity: var(--section-progress); }
+    :global(.js.journey-ready) .practice-copy-mask p { clip-path: inset(0 calc((1 - var(--section-progress)) * 100%) 0 0); }
+    :global(.js.journey-ready) .current {
+      opacity: var(--section-progress);
+      transform: translateY(calc((1 - var(--section-progress)) * 24px));
+    }
+
+    :global(.js.journey-ready) .work-band { min-height: 420vh; min-height: 420svh; }
+    :global(.js.journey-ready) .work-scene {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100svh;
+      padding-top: clamp(64px, 8vh, 112px);
+      padding-bottom: clamp(48px, 6vh, 96px);
+    }
+    :global(.js.journey-ready) .project-theatre > li { position: absolute; inset: 0; margin: 0; }
+    :global(.js.journey-ready) .project-card {
+      display: block;
+      opacity: 0.1;
+      pointer-events: none;
+      clip-path: inset(100% 0 0 0);
+      transform: translateY(8%);
+      transition: opacity var(--emphasis) var(--ease), transform var(--emphasis) var(--ease), clip-path var(--emphasis) var(--ease);
+    }
+    :global(.js.journey-ready) .project-card.is-before { clip-path: inset(0 0 100% 0); transform: translateY(-8%); }
+    :global(.js.journey-ready) .project-card.is-active,
+    :global(.js.journey-ready) .project-card:focus-visible {
+      z-index: 2;
+      opacity: 1;
+      pointer-events: auto;
+      clip-path: inset(0);
+      transform: translateY(0);
+    }
+    :global(.js.journey-ready) .waypoint-route { stroke-dashoffset: calc(1 - var(--section-progress)); }
+
+    :global(.js.journey-ready) .about { min-height: 160vh; min-height: 160svh; padding: 0; }
+    :global(.js.journey-ready) .about-scene { position: sticky; top: 0; min-height: 100vh; min-height: 100svh; align-content: center; }
+    :global(.js.journey-ready) .about-mask, :global(.js.journey-ready) .about-seam { display: block; }
+    :global(.js.journey-ready) .about-mask--left { transform: translateX(calc(var(--section-progress) * -102%)); }
+    :global(.js.journey-ready) .about-mask--right { transform: translateX(calc(var(--section-progress) * 102%)); }
+    :global(.js.journey-ready) .about-seam { left: calc(12% + var(--section-progress) * 76%); opacity: calc(1 - var(--section-progress)); }
+    :global(.js.journey-ready) .about-exit path { stroke-dashoffset: calc(1 - var(--section-progress)); }
+
+    :global(.js.journey-ready) .experience { min-height: 220vh; min-height: 220svh; padding: 0; }
+    :global(.js.journey-ready) .trace-scene { position: sticky; top: 0; min-height: 100vh; min-height: 100svh; padding-top: 80px; }
+    :global(.js.journey-ready) .trace-route__progress { stroke-dashoffset: calc(1 - var(--section-progress)); }
+    :global(.js.journey-ready) .trace-route circle[data-trace-node] { fill: var(--background); stroke: var(--border); }
+    :global(.js.journey-ready) .trace-route circle[data-trace-node].is-traced { fill: var(--accent); stroke: var(--accent); }
+    :global(.js.journey-ready) .experience-row {
+      opacity: 0.3;
+      transform: translateY(16px);
+      transition: opacity var(--base) var(--ease), transform var(--base) var(--ease);
+    }
+    :global(.js.journey-ready) .experience-row.is-traced { opacity: 1; transform: translateY(0); }
+    :global(.js.journey-ready) .trace-current-ring { animation: trace-pulse 2.4s ease-in-out infinite; }
+
+    :global(.js.journey-ready) .contact { min-height: 170vh; min-height: 170svh; }
+    :global(.js.journey-ready) .contact-scene {
+      position: sticky;
+      top: 0;
+      display: flex;
+      height: 100vh;
+      height: 100svh;
+      flex-direction: column;
+      padding-top: 64px;
+    }
+    :global(.js.journey-ready) .contact-action { flex: 1; min-height: 0; }
+    :global(.js.journey-ready) .arrival-strand { stroke-dashoffset: calc(1 - var(--section-progress)); }
+    :global(.js.journey-ready) .arrival-orbit { stroke-dashoffset: calc(1 - var(--section-progress)); }
+    :global(.js.journey-ready) .arrival-field { transform: translate(-50%, -50%) rotate(calc(-9deg + var(--section-progress) * 9deg)); }
+    :global(.js.journey-ready) .arrival-endpoint { opacity: var(--section-progress); transform: translateX(calc((1 - var(--section-progress)) * -80px)); }
+    :global(.js.journey-ready) .contact-title { transform: scaleX(calc(1.04 - var(--section-progress) * 0.04)); }
+    :global(.js.journey-ready) .email { opacity: calc(0.48 + var(--section-progress) * 0.52); }
+    :global(.js.journey-ready) .email::after { transform: scaleX(var(--section-progress)); }
   }
 
-  :global(.js) .experience-row {
-    transform: translateY(16px);
-    transition-delay: var(--row-delay, 0ms);
+  @keyframes trace-pulse { 50% { opacity: 0.12; transform: scale(1.3); transform-origin: center; } }
+
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .portfolio { padding-right: 112px; }
+    .work-scene, .contact-scene { padding-right: 112px; }
+    .journey-rail { right: 8px; }
   }
 
-  :global(.js) .reveal-rule { transform: scaleX(0); transition: transform var(--sequence) var(--ease); }
-  :global(.js) .project .project-plate { clip-path: inset(0 0 100% 0); }
-  :global(.js) .project .project-plate .plate-art { transform: translateY(24px) scale(1); }
-
-  :global(.js) .reveal-text.is-visible,
-  :global(.js) .experience-row.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+  @media (min-width: 768px) and (max-width: 1023px) {
+    :global(.js.journey-ready) .hero,
+    :global(.js.journey-ready) .practice,
+    :global(.js.journey-ready) .about,
+    :global(.js.journey-ready) .contact { min-height: 140vh; min-height: 140svh; }
+    :global(.js.journey-ready) .hero-scene,
+    :global(.js.journey-ready) .practice-scene,
+    :global(.js.journey-ready) .about-scene,
+    :global(.js.journey-ready) .contact-scene { position: sticky; top: 0; min-height: 100vh; min-height: 100svh; }
+    .practice-scene { grid-template-columns: 0.8fr 1.2fr; gap: 32px; }
+    .work-scene { grid-template-columns: 1fr; }
+    .work-navigation { display: grid; grid-template-columns: 1fr auto; align-items: end; }
+    .waypoint-index { display: none; }
   }
 
-  :global(.js) .reveal-rule.is-visible { transform: scaleX(1); }
-  :global(.js) .project.is-visible .project-plate { clip-path: inset(0 0 0 0); }
-  :global(.js) .project.is-visible .project-plate .plate-art { transform: translateY(0) scale(1); }
-  :global(.js) .project.is-visible:hover .plate-art,
-  :global(.js) .project.is-visible:focus-visible .plate-art { transform: translateY(-8px) scale(1.025); }
+  @media (max-width: 1023px) {
+    .journey-handoff { width: 1280px; left: 54%; }
+    .project-theatre { display: grid; grid-template-columns: 1fr 1fr; gap: 80px 32px; }
+    .project-theatre > li + li { margin-top: 0; }
+    .experience-row { grid-template-columns: 80px 1fr 1fr; gap: 16px; }
+    .experience-location { display: none; }
+  }
+
+  @media (max-width: 767px) {
+    .portfolio { padding-top: 20px; }
+    .top { align-items: flex-start; }
+    .top-right { align-items: flex-end; flex-direction: column; gap: 8px; }
+    .status { max-width: 150px; justify-content: flex-end; text-align: right; }
+    .journey-handoff { width: 940px; left: 68%; opacity: 0.12; }
+    .hero, .hero-scene { min-height: 680px; }
+    :global(.js.journey-ready) .hero { min-height: 120vh; min-height: 120svh; }
+    :global(.js.journey-ready) .hero-scene { position: sticky; top: 0; height: 100vh; height: 100svh; }
+    .hero-scene { padding-top: 64px; }
+    .hero h1 { font-size: clamp(72px, 22vw, 96px); }
+    .hero-line--three { flex-wrap: wrap; }
+    .practice-pill { margin-top: 8px; }
+    .orient-field { top: 12%; width: 980px; left: 64%; opacity: 0.68; }
+    .scroll-cue { bottom: 24px; }
+    .practice { padding: 96px 0 112px; }
+    .practice-scene { grid-template-columns: 1fr; gap: 32px; }
+    .practice-statement { padding: 0; }
+    .practice-statement h2 { margin-top: 24px; }
+    .practice-copy-mask p { margin-top: 40px; }
+    .align-field { min-height: 560px; border-left: 0; border-top: 1px solid rgba(77, 84, 74, 0.3); }
+    .current { right: 0; width: 92%; grid-template-columns: 1fr; }
+    .work-scene { grid-template-columns: 1fr; padding-top: 96px; padding-bottom: 112px; }
+    .waypoint-index { display: none; }
+    .project-theatre { grid-template-columns: 1fr; gap: 72px; margin-top: 32px; }
+    .project-card { opacity: 1; transform: none; clip-path: none; }
+    :global(.js.journey-ready) .project-card:not(.is-seen) .project-plate { clip-path: inset(0 0 100% 0); }
+    :global(.js.journey-ready) .project-card .project-plate { transition: clip-path var(--sequence) var(--ease); }
+    .project-meta { grid-template-columns: 1fr auto; gap: 8px 16px; }
+    .project-meta > span:last-child { grid-column: 2; }
+    .project-name { grid-row: 1 / span 2; }
+    .about { min-height: auto; padding: 112px 0 96px; }
+    .about-scene { min-height: auto; grid-template-columns: 1fr; gap: 40px; }
+    .about-exit { grid-column: 1; margin-top: 0; }
+    .about-exit path { stroke: var(--accent); stroke-width: 3; }
+    .experience { min-height: auto; padding: 96px 0 112px; }
+    .experience-title-row { align-items: flex-start; flex-direction: column; gap: 24px; }
+    .trace-body { grid-template-columns: 44px 1fr; gap: 12px; }
+    .trace-route { width: 44px; }
+    .experience-row { min-height: 130px; grid-template-columns: 64px 1fr; gap: 12px; }
+    .experience-role { grid-column: 2; }
+    .contact { min-height: auto; }
+    :global(.js.journey-ready) .contact { min-height: 120vh; min-height: 120svh; }
+    :global(.js.journey-ready) .contact-scene { position: sticky; top: 0; min-height: 100vh; min-height: 100svh; }
+    .contact-scene { padding-top: 64px; }
+    .contact-action { min-height: 460px; }
+    .arrival-field { width: 160vw; }
+    .contact-title { font-size: clamp(72px, 24vw, 112px); }
+    .contact-meta { flex-direction: column; padding-bottom: 8px; }
+  }
+
+  @media (max-width: 359px) {
+    .hero h1 { font-size: 72px; }
+    .mark { max-width: 116px; }
+    .project-name { gap: 8px; font-size: 18px; }
+    .align-label--delivery { max-width: 110px; text-align: right; }
+  }
 
   @media (hover: hover) and (pointer: fine) {
     :global(body) { cursor: none; }
     .custom-cursor { display: block; }
   }
 
-  @media (max-width: 1023px) {
-    .living-contour { width: 1280px; left: 54%; opacity: 0.24; }
-    .hero { min-height: 720px; }
-    .project--portrait { grid-column: 1 / span 6; }
-    .project--landscape { grid-column: 7 / -1; }
-    .project--offset { grid-column: 3 / span 8; }
-  }
-
-  @media (max-width: 767px) {
-    .progress-rail { display: none; }
-    .portfolio { padding-top: 20px; }
-    .top { align-items: flex-start; }
-    .top-right { align-items: flex-end; flex-direction: column; gap: 8px; }
-    .status { max-width: 150px; justify-content: flex-end; text-align: right; }
-    .hero { min-height: 650px; padding-top: 64px; }
-    .hero-line--three { flex-wrap: wrap; }
-    .hero-orbit { top: 12%; right: -20%; opacity: 0.75; }
-    .practice { grid-template-columns: 1fr; gap: 48px; padding: 96px 0 112px; }
-    .practice-label h2 { margin-top: 24px; }
-    .current { grid-template-columns: 1fr; gap: 16px; }
-    .about { grid-template-columns: 1fr; padding: 112px 0 96px; }
-    .experience-head,
-    .experience-row { grid-template-columns: 72px 1fr 1fr; gap: 12px; }
-    .experience-head span:last-child,
-    .experience-location { display: none; }
-    .contact-meta { flex-wrap: wrap; }
-  }
-
-  @media (max-width: 639px) {
-    .living-contour { width: 940px; left: 68%; opacity: 0.2; }
-    .hero { min-height: 610px; }
-    .hero h1 { font-size: clamp(72px, 22vw, 92px); line-height: 0.84; }
-    .practice-pill { margin-top: 8px; transform: none; }
-    .scroll-cue { bottom: 24px; }
-    .band-inner { padding-top: 96px; padding-bottom: 112px; }
-    .work-head { grid-template-columns: 1fr; }
-    .work-rule { grid-column: 1; }
-    .work-grid { grid-template-columns: 1fr; gap: 72px; margin-top: 64px; }
-    .project,
-    .project--featured,
-    .project--portrait,
-    .project--landscape,
-    .project--offset { grid-column: 1; }
-    .project--featured .project-plate,
-    .project--portrait .project-plate { aspect-ratio: 4 / 3; }
-    .project-meta { grid-template-columns: 1fr auto; gap: 8px 16px; min-height: 72px; }
-    .project-year { grid-column: 2; }
-    .project-tag { grid-column: 2; grid-row: 1; }
-    .project-name { grid-row: 1 / span 2; }
-    .experience-title-row { align-items: flex-start; flex-direction: column; gap: 24px; }
-    .experience-head { display: none; }
-    .experience-row { grid-template-columns: 64px 1fr; min-height: 104px; }
-    .experience-role { grid-column: 2; }
-    .experience { padding-bottom: 112px; }
-    .contact-inner { padding-top: 64px; }
-    .contact-action { min-height: 430px; }
-    .contact-orbit { width: 150vw; }
-    .contact-title { font-size: clamp(72px, 24vw, 112px); }
-    .contact-meta { flex-direction: column; padding-bottom: 8px; }
-    :global(.js) .reveal-text { transform: translateY(12px); }
-    :global(.js) .experience-row { transform: translateY(8px); transition-delay: min(var(--row-delay, 0ms), 150ms); }
-    :global(.js) .project .project-plate .plate-art { transform: translateY(12px) scale(1); }
-  }
-
-  @media (max-width: 359px) {
-    .hero h1 { font-size: 72px; }
-    .hero-orbit { width: 190px; }
-    .project-name { gap: 8px; font-size: 18px; }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .contour-path { stroke-dashoffset: 0; }
-    .hero-line-inner,
-    .reveal-text,
-    .reveal-rule,
-    .experience-row,
-    .project-plate,
-    .plate-art,
-    .contact-orbit,
-    .hero-orbit {
+    .journey-rail, .custom-cursor { display: none !important; }
+    .status-dot, .trace-current-ring { animation: none !important; }
+    .journey-handoff path, .orient-path, .orient-resolved, .align-route, .waypoint-route,
+    .about-exit path, .trace-route__progress, .arrival-strand, .arrival-orbit { stroke-dashoffset: 0 !important; }
+    .hero-line, .orient-compass, .orient-beacon, .align-stream, .practice-copy-mask p, .current,
+    .project-card, .about-mask, .about-seam, .experience-row, .arrival-field, .arrival-endpoint,
+    .contact-title, .email, .email::after {
       opacity: 1 !important;
-      clip-path: inset(0 0 0 0) !important;
+      clip-path: none !important;
       transform: none !important;
     }
-    .contact-orbit { transform: translate(-50%, -50%) !important; }
-    .status-dot { animation: none; }
-    .custom-cursor { display: none !important; }
+    .about-mask, .about-seam { display: none !important; }
+    .arrival-field { transform: translate(-50%, -50%) !important; }
+    .email::after { transform: scaleX(1) !important; }
     :global(body) { cursor: auto !important; }
   }
 </style>
@@ -1023,61 +1112,132 @@ const experience = [
   const root = document.documentElement;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const journeySections = Array.from(document.querySelectorAll<HTMLElement>("[data-journey]"));
+  const railStages = Array.from(document.querySelectorAll<HTMLElement>("[data-rail-stage]"));
+  const projectCards = Array.from(document.querySelectorAll<HTMLElement>("[data-project]"));
+  const waypointNodes = Array.from(document.querySelectorAll<SVGCircleElement>("[data-waypoint-node]"));
+  const waypointLabels = Array.from(document.querySelectorAll<HTMLElement>("[data-waypoint-label]"));
+  const experienceRows = Array.from(document.querySelectorAll<HTMLElement>("[data-experience]"));
+  const traceNodes = Array.from(document.querySelectorAll<SVGCircleElement>("[data-trace-node]"));
+  const stageOrder: Record<string, number> = { orient: 0, align: 1, navigate: 2, reveal: 2, trace: 3, arrive: 4 };
 
-  if (reducedMotion) {
-    root.classList.add("hero-ready");
-    root.style.setProperty("--contour-progress", "1");
-    root.style.setProperty("--page-progress", "1");
-  } else {
-    const fontReady = document.fonts?.ready ?? Promise.resolve();
-    const timeout = new Promise<void>((resolve) => window.setTimeout(resolve, 700));
-    Promise.race([fontReady, timeout]).then(() => {
-      requestAnimationFrame(() => root.classList.add("hero-ready"));
+  type JourneyGeometry = { element: HTMLElement; top: number; height: number; runway: number };
+  let geometry: JourneyGeometry[] = [];
+  let viewportHeight = window.innerHeight;
+  let frame = 0;
+  let forcedProject = -1;
+
+  const clamp = (value: number) => Math.min(Math.max(value, 0), 1);
+
+  const measure = () => {
+    viewportHeight = window.innerHeight;
+    geometry = journeySections.map((element) => {
+      const rect = element.getBoundingClientRect();
+      const height = element.offsetHeight;
+      return {
+        element,
+        top: rect.top + window.scrollY,
+        height,
+        runway: Math.max(height - viewportHeight, 1),
+      };
+    });
+  };
+
+  const setProject = (activeIndex: number) => {
+    projectCards.forEach((card, index) => {
+      card.classList.toggle("is-active", index === activeIndex);
+      card.classList.toggle("is-before", index < activeIndex);
+      card.classList.toggle("is-after", index > activeIndex);
+    });
+    waypointNodes.forEach((node, index) => {
+      node.classList.toggle("is-active", index === activeIndex);
+      node.classList.toggle("is-complete", index < activeIndex);
+    });
+    waypointLabels.forEach((label, index) => label.classList.toggle("is-active", index === activeIndex));
+  };
+
+  const setTrace = (progress: number) => {
+    const thresholds = [0.82, 0.6, 0.36, 0.14];
+    experienceRows.forEach((row, index) => row.classList.toggle("is-traced", progress >= thresholds[index]));
+    traceNodes.forEach((node) => {
+      const index = Number(node.dataset.traceNode);
+      node.classList.toggle("is-traced", progress >= thresholds[index]);
+    });
+  };
+
+  const updateDirector = () => {
+    const scrollY = window.scrollY;
+    const scrollRange = Math.max(document.documentElement.scrollHeight - viewportHeight, 1);
+    const reads = geometry.map((item) => ({
+      ...item,
+      progress: clamp((scrollY - item.top) / item.runway),
+    }));
+
+    let activeRail = 0;
+    const probe = scrollY + viewportHeight * 0.46;
+    reads.forEach((item) => {
+      item.element.style.setProperty("--section-progress", item.progress.toFixed(4));
+      item.element.style.setProperty("--section-active", probe >= item.top && probe <= item.top + item.height ? "1" : "0");
+      if (probe >= item.top) activeRail = stageOrder[item.element.dataset.stage ?? "orient"] ?? activeRail;
+    });
+    root.style.setProperty("--page-progress", clamp(scrollY / scrollRange).toFixed(4));
+
+    railStages.forEach((stage, index) => {
+      stage.classList.toggle("is-active", index === activeRail);
+      stage.classList.toggle("is-complete", index < activeRail);
     });
 
-    const observed = document.querySelectorAll(".reveal-text, .reveal-rule, .project, .experience-row");
-    const projectsToReveal = Array.from(document.querySelectorAll<HTMLElement>(".project"));
-    const revealObserver = new IntersectionObserver((entries) => {
+    const workState = reads.find((item) => item.element.dataset.stage === "navigate");
+    if (workState) {
+      const activeProject = forcedProject >= 0 ? forcedProject : Math.min(3, Math.floor(Math.min(workState.progress, 0.9999) * 4));
+      setProject(activeProject);
+    }
+
+    const traceState = reads.find((item) => item.element.dataset.stage === "trace");
+    if (traceState) setTrace(traceState.progress);
+    frame = 0;
+  };
+
+  const queueUpdate = () => {
+    if (!frame) frame = requestAnimationFrame(updateDirector);
+  };
+
+  if (!reducedMotion) {
+    root.classList.add("journey-ready");
+    measure();
+    updateDirector();
+
+    window.addEventListener("scroll", queueUpdate, { passive: true });
+    window.addEventListener("resize", () => {
+      measure();
+      queueUpdate();
+    }, { passive: true });
+
+    const mobileReveal = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          revealObserver.unobserve(entry.target);
+          entry.target.classList.add("is-seen");
+          mobileReveal.unobserve(entry.target);
         }
       });
-    }, { rootMargin: "0px 0px -7% 0px", threshold: 0.08 });
-    observed.forEach((element) => revealObserver.observe(element));
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    projectCards.forEach((card) => mobileReveal.observe(card));
 
-    const contact = document.querySelector<HTMLElement>("[data-contact]");
-    let scrollFrame = 0;
-    const updateScroll = () => {
-      const scrollRange = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-      const progress = Math.min(Math.max(window.scrollY / scrollRange, 0), 1);
-      root.style.setProperty("--page-progress", progress.toFixed(4));
-      root.style.setProperty("--contour-progress", (0.2 + progress * 0.8).toFixed(4));
-
-      projectsToReveal.forEach((project) => {
-        if (project.classList.contains("is-visible")) return;
-        const projectRect = project.getBoundingClientRect();
-        if (projectRect.top < window.innerHeight * 0.93 || projectRect.bottom < 0) {
-          project.classList.add("is-visible");
-          revealObserver.unobserve(project);
-        }
+    projectCards.forEach((card, index) => {
+      card.addEventListener("focus", () => {
+        forcedProject = index;
+        setProject(index);
       });
-
-      if (contact) {
-        const rect = contact.getBoundingClientRect();
-        const sectionProgress = Math.min(Math.max((window.innerHeight - rect.top) / (window.innerHeight + rect.height), 0), 1);
-        contact.style.setProperty("--contact-rotation", `${(-9 + sectionProgress * 18).toFixed(2)}deg`);
-      }
-      scrollFrame = 0;
-    };
-
-    const queueScrollUpdate = () => {
-      if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScroll);
-    };
-    window.addEventListener("scroll", queueScrollUpdate, { passive: true });
-    window.addEventListener("resize", queueScrollUpdate, { passive: true });
-    queueScrollUpdate();
+      card.addEventListener("blur", () => {
+        forcedProject = -1;
+        queueUpdate();
+      });
+    });
+  } else {
+    root.classList.add("journey-reduced");
+    projectCards.forEach((card) => card.classList.add("is-active", "is-seen"));
+    experienceRows.forEach((row) => row.classList.add("is-traced"));
+    traceNodes.forEach((node) => node.classList.add("is-traced"));
   }
 
   if (finePointer && !reducedMotion) {
@@ -1102,24 +1262,20 @@ const experience = [
     }, { passive: true });
 
     document.addEventListener("pointerover", (event) => {
-      const target = event.target as Element;
-      const action = target.closest<HTMLElement>("a[data-cursor]");
+      const action = (event.target as Element).closest<HTMLElement>("a[data-cursor]");
       cursor?.classList.toggle("is-active", Boolean(action));
       if (action && cursorLabel) cursorLabel.textContent = action.dataset.cursor ?? "VIEW";
     });
 
     document.addEventListener("pointerleave", () => cursor?.classList.remove("is-visible"));
-
     hero?.addEventListener("pointermove", (event) => {
       const rect = hero.getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 16;
-      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 16;
-      hero.style.setProperty("--hero-x", `${x.toFixed(2)}px`);
-      hero.style.setProperty("--hero-y", `${y.toFixed(2)}px`);
+      hero.style.setProperty("--pointer-x", `${(((event.clientX - rect.left) / rect.width - 0.5) * 8).toFixed(2)}px`);
+      hero.style.setProperty("--pointer-y", `${(((event.clientY - rect.top) / rect.height - 0.5) * 8).toFixed(2)}px`);
     }, { passive: true });
     hero?.addEventListener("pointerleave", () => {
-      hero.style.setProperty("--hero-x", "0px");
-      hero.style.setProperty("--hero-y", "0px");
+      hero.style.setProperty("--pointer-x", "0px");
+      hero.style.setProperty("--pointer-y", "0px");
     });
   }
 </script>

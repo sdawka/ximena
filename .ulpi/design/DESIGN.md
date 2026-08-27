@@ -5,7 +5,7 @@ aesthetic_direction: editorial / magazine
 color_strategy: committed
 design_system: bespoke
 design_variance: 7
-motion_intensity: 7
+motion_intensity: 9
 visual_density: 5
 ---
 
@@ -17,7 +17,7 @@ Quiet editorial rigor interrupted by a living cartographic field. The page shoul
 
 ## Signature
 
-The **Living Contour** is one hand-drawn SVG path system that appears behind the hero, passes through selected work, and resolves into a contact orbit. Its line-drawing progress is tied to scroll and its geometry is reused in project art. This makes the page feel like one considered system rather than a collection of effects. Everything around it stays typographically disciplined.
+The **Living Contour Journey** is one hand-drawn SVG route that changes purpose across five scroll chapters: it searches in Orient, converges in Align, indexes work in Navigate, becomes a career timeline in Trace, and resolves into a contact orbit in Arrive. Each section owns a local beginning, transformation, and resolved state; the route is the visual handoff between them. Everything around it stays typographically disciplined.
 
 ## Color (locked)
 
@@ -57,7 +57,7 @@ Type scale: `11, 13, 16, 20, 28, 40, 64, clamp(72px, 14vw, 214px)`. Headlines us
 - Spacing: `0, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 128, 160, 224px`.
 - Radius: `0, 2px, 9999px`. Rectangular editorial frames stay square; pills and circular markers use full radius.
 - Motion: `fast 120ms`, `base 300ms`, `emphasis 500ms`, `sequence 900ms`; easing `cubic-bezier(0.16, 1, 0.3, 1)`.
-- Motion rule: transforms and opacity only during continuous scroll. SVG drawing may update stroke dash offset. No bounce, elastic, or perpetual decorative motion beyond the availability pulse.
+- Motion rule: transforms and opacity only during continuous scroll. SVG drawing may update stroke dash offset. Scroll motion is section-local and narrative: each chapter must visibly progress from an unresolved to a resolved state. No bounce, elastic, scroll-jacking, or perpetual decorative motion beyond the availability pulse.
 - Reduced motion: all elements render in their final state; no smooth scrolling, parallax, pointer-following, line drawing, or transition longer than 1ms.
 - Breakpoints: `sm 640`, `md 768`, `lg 1024`, `xl 1280`, `2xl 1536`.
 - Z-index: `base 0`, `art 1`, `content 2`, `sticky 30`, `fixed 40`, `cursor 70`, `skip-link 80`.
