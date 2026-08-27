@@ -14,154 +14,108 @@ const { title, locale = "en" } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The independent project leadership practice of Ximena Alvarez Sosa, connecting strategy, design, and execution."
+    />
     <title>{title}</title>
+    <script is:inline>document.documentElement.classList.add("js");</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="pf-cursor"></div>
     <slot />
   </body>
 </html>
 
 <style is:global>
-  *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
   :root {
-    --cream: #f3ede1;
-    --cream-2: #ebe3d3;
-    --cream-3: #ded4bf;
-    --ink: #1a1815;
-    --ink-2: #3d3a33;
-    --ink-3: #6b665a;
-    --rule: rgba(26,24,21,0.14);
-    --ff-display: 'Inter Tight', sans-serif;
-    --ff-body: 'Inter Tight', sans-serif;
-    --ff-mono: 'JetBrains Mono', monospace;
-    --pad-x: 6vw;
-    --pad-y: 88px;
-    --gap: 64px;
+    --background: #c4ccbf;
+    --surface: #dde2da;
+    --elevated: #f0f2ed;
+    --inverse: #171a16;
+    --text: #141713;
+    --text-inverse: #e9ede6;
+    --muted: #4d544a;
+    --subtle: #7d8678;
+    --border: #929b8d;
+    --accent: #e1572d;
+    --success: #3f7d4f;
+    --ff-display: "Archivo", "Arial Narrow", sans-serif;
+    --ff-editorial: "Newsreader", Georgia, serif;
+    --ff-mono: "IBM Plex Mono", monospace;
+    --page-pad: clamp(16px, 4.5vw, 80px);
+    --content-max: 1440px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --fast: 120ms;
+    --base: 300ms;
+    --emphasis: 500ms;
+    --sequence: 900ms;
+    --page-progress: 0;
+    --contour-progress: 1;
+  }
+
+  html {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    scroll-padding-top: 24px;
+    overflow-x: clip;
+    background: var(--background);
   }
 
   body {
-    background: var(--cream);
-    color: var(--ink);
-    font-family: var(--ff-body);
+    min-width: 320px;
+    margin: 0;
+    padding: 0;
+    overflow-x: clip;
+    background: var(--background);
+    color: var(--text);
+    font-family: var(--ff-display);
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
-    cursor: none;
+    text-rendering: optimizeLegibility;
   }
 
-  a { color: inherit; text-decoration: none; }
-
-  /* Custom cursor */
-  .pf-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--ink);
-    pointer-events: none;
-    mix-blend-mode: difference;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s ease, height 0.2s ease;
-    z-index: 9999;
-    opacity: 0;
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
-  .pf-cursor.hover {
-    width: 56px;
-    height: 56px;
-    background: var(--cream);
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
   }
 
-  @media (hover: none) {
-    .pf-cursor { display: none; }
-    body { cursor: auto; }
+  ::selection {
+    background: var(--accent);
+    color: var(--inverse);
   }
 
-  /* Reveal animations */
-  .reveal {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1);
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 
-  .reveal.in {
-    opacity: 1;
-    transform: none;
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 1ms !important;
+      transition-delay: 0ms !important;
+    }
   }
-
-  /* Layout container */
-  .pf {
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: var(--pad-y) var(--pad-x);
-    position: relative;
-  }
-
-  /* Gradient placeholders */
-  .grad-1 { background: linear-gradient(135deg, #d4b88a 0%, #ebe3d3 60%, #b89968 100%); }
-  .grad-2 { background: radial-gradient(circle at 30% 30%, #c8a574, #1a1815); }
-  .grad-3 { background: linear-gradient(180deg, #ebe3d3 0%, #8a7a52 100%); }
-  .grad-4 { background: conic-gradient(from 220deg at 60% 40%, #d4b88a, #1a1815, #c8a574, #d4b88a); }
 </style>
-
-<script>
-  // Custom cursor
-  const cursor = document.querySelector('.pf-cursor') as HTMLElement;
-  if (cursor) {
-    let raf = 0;
-    const onMove = (e: MouseEvent) => {
-      cursor.style.opacity = '1';
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-      });
-    };
-    const onOver = (e: MouseEvent) => {
-      const t = e.target as HTMLElement;
-      if (t.closest && t.closest('a, .proj, button, input, .pill')) {
-        cursor.classList.add('hover');
-      } else {
-        cursor.classList.remove('hover');
-      }
-    };
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseover', onOver);
-  }
-
-  // Reveal animations
-  const revealEls = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  revealEls.forEach((el) => revealObserver.observe(el));
-
-  // Parallax
-  let parallaxRaf = 0;
-  const onScroll = () => {
-    cancelAnimationFrame(parallaxRaf);
-    parallaxRaf = requestAnimationFrame(() => {
-      document.querySelectorAll('[data-parallax]').forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        const vh = window.innerHeight || 800;
-        const speed = parseFloat((el as HTMLElement).dataset.parallax || '0.05');
-        const offset = (rect.top + rect.height / 2 - vh / 2) * speed;
-        (el as HTMLElement).style.transform = `translateY(${offset.toFixed(2)}px)`;
-      });
-    });
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-</script>

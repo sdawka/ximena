@@ -7,10 +7,10 @@ const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 
 const projects = [
-  { n: "01", name: "Fintech Rebrand", tags: ["Strategy", "Launch"], year: "2025", grad: "grad-1", featured: true },
-  { n: "02", name: "Museo Digital", tags: ["Digital", "Program"], year: "2024", grad: "grad-2" },
-  { n: "03", name: "Vertex Studio", tags: ["Operations", "Design"], year: "2024", grad: "grad-3" },
-  { n: "04", name: "Marca Ciudad", tags: ["Branding", "Civic"], year: "2023", grad: "grad-4" },
+  { n: "01", name: "Fintech Rebrand", tags: ["Strategy", "Launch"], year: "2025", featured: true },
+  { n: "02", name: "Museo Digital", tags: ["Digital", "Program"], year: "2024", shape: "portrait" },
+  { n: "03", name: "Vertex Studio", tags: ["Operations", "Design"], year: "2024", shape: "landscape" },
+  { n: "04", name: "Marca Ciudad", tags: ["Branding", "Civic"], year: "2023", shape: "offset" },
 ];
 
 const experience = [
@@ -22,114 +22,378 @@ const experience = [
 ---
 
 <Layout title={t.meta.title} locale={locale}>
-  <main class="pf">
-    <!-- Top -->
-    <header class="top reveal">
+  <a class="skip-link" href="#work">{t.work.skip}</a>
+
+  <div class="atmosphere" aria-hidden="true">
+    <span class="ink-bloom ink-bloom--oxide"></span>
+    <span class="ink-bloom ink-bloom--graphite"></span>
+    <svg class="grain" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
+      <filter id="paper-grain">
+        <feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="2" seed="18" />
+        <feColorMatrix type="saturate" values="0" />
+      </filter>
+      <rect width="100" height="100" filter="url(#paper-grain)" opacity="0.8" />
+    </svg>
+
+    <svg class="living-contour" viewBox="0 0 1440 980" fill="none" focusable="false">
+      <path class="contour-path" pathLength="1" d="M-85 196C143 24 335 54 467 194c140 149 259 142 386 22 160-151 309-137 672 70" />
+      <path class="contour-path contour-path--soft" pathLength="1" d="M-118 302c235-177 419-135 548 5 129 141 293 181 447 32 143-138 320-129 654 80" />
+      <path class="contour-path contour-path--oxide" pathLength="1" d="M104 898c54-148 136-231 260-249 158-23 232 113 375 82 139-30 163-173 317-197 111-17 215 34 353 143" />
+      <circle cx="1055" cy="534" r="6" />
+      <circle cx="1055" cy="534" r="18" />
+    </svg>
+  </div>
+
+  <div class="progress-rail" aria-hidden="true"><span></span></div>
+  <div class="custom-cursor" aria-hidden="true">
+    <span class="cursor-core"></span><span class="cursor-label">VIEW</span>
+  </div>
+
+  <main class="portfolio">
+    <header class="top reveal-text">
       <div class="mark">Ximena Alvarez Sosa</div>
       <div class="top-right">
         <LanguagePicker />
-        <div class="status">
-          <span class="dot"></span>
-          {t.header.available}
-        </div>
+        <div class="status"><span class="status-dot"></span>{t.header.available}</div>
       </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="row r1 reveal">{t.hero.designer}<span class="ampshape"></span></div>
-      <div class="row r2 reveal" style="transition-delay: 160ms">{t.hero.of} <em>{t.hero.quiet}</em>,</div>
-      <div class="row r3 reveal" style="transition-delay: 320ms">
-        {t.hero.considered}<span class="pill">{t.hero.pill}</span>
+    <section class="hero" aria-labelledby="hero-title" data-hero>
+      <h1 id="hero-title">
+        <span class="hero-line hero-line--one"><span class="hero-line-inner">{t.hero.designer}</span></span>
+        <span class="hero-line hero-line--two">
+          <span class="hero-line-inner">{t.hero.of} <em>{t.hero.quiet}</em>,</span>
+        </span>
+        <span class="hero-line hero-line--three">
+          <span class="hero-line-inner">{t.hero.considered}</span>
+          <span class="practice-pill hero-line-inner">{t.hero.pill}</span>
+        </span>
+        <span class="hero-line hero-line--four"><span class="hero-line-inner"><em>{t.hero.systems}</em></span></span>
+      </h1>
+
+      <svg class="hero-orbit" viewBox="0 0 300 300" aria-hidden="true" focusable="false" data-hero-orbit>
+        <g class="hero-orbit-ring">
+          <ellipse cx="150" cy="150" rx="126" ry="68" />
+          <path d="M150 72v-15M143 64h14" />
+          <circle cx="276" cy="150" r="3" />
+        </g>
+        <circle class="hero-orbit-core" cx="150" cy="150" r="46" />
+      </svg>
+
+      <a class="scroll-cue" href="#work" data-cursor="VIEW">
+        <span>{t.work.action}</span>
+        <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+          <path d="M24 8v29M16 29l8 8 8-8" />
+        </svg>
+      </a>
+    </section>
+
+    <section class="practice" aria-labelledby="practice-title">
+      <div class="practice-label reveal-text">
+        <p class="eyebrow">{t.practice.label}</p>
+        <h2 id="practice-title">{t.practice.title}</h2>
       </div>
-      <div class="row r4 reveal" style="transition-delay: 480ms">
-        <em>{t.hero.systems}</em>
+      <div class="practice-copy">
+        <div class="reveal-rule"></div>
+        <p class="reveal-text" set:html={t.practice.text} />
+        <div class="current reveal-text">
+          <span class="eyebrow">{t.currently.label}</span>
+          <p>{t.currently.text}</p>
+        </div>
       </div>
     </section>
 
-    <!-- Lede -->
-    <div class="lede">
-      <div class="reveal">
-        <div class="lbl">{t.practice.label}</div>
-        <p set:html={t.practice.text} />
-      </div>
-      <div class="reveal" style="transition-delay: 160ms">
-        <div class="lbl">{t.currently.label}</div>
-        <p>{t.currently.text}</p>
-      </div>
-    </div>
+    <section class="work-band full-bleed" id="work" aria-labelledby="work-title">
+      <div class="band-inner">
+        <div class="work-head">
+          <span class="eyebrow reveal-text">{t.work.label}</span>
+          <h2 id="work-title" class="reveal-text">{t.work.title} <em>{t.work.titleEm}</em></h2>
+          <div class="work-rule reveal-rule"></div>
+        </div>
 
-    <!-- Work -->
-    <div class="work-head">
-      <span class="l reveal">{t.work.label}</span>
-      <h2 class="reveal" id="work">{t.work.title} <em>{t.work.titleEm}</em></h2>
-    </div>
-
-    <section class="work-grid">
-      {projects.map((p, i) => (
-        <a href="#" class={`proj reveal ${p.featured ? "featured" : ""}`} style={`transition-delay: ${i * 90}ms`}>
-          <div class={`thumb ${p.grad}`} data-parallax={i % 2 ? "-0.04" : "0.04"}></div>
-          <div class="meta">
-            <span class="name">{p.name}</span>
-            <span class="tag">{p.tags[0]}</span>
-            <span class="yr">{p.year}</span>
-          </div>
-        </a>
-      ))}
+        <div class="work-grid">
+          {projects.map((project, index) => (
+            <a
+              href="#contact"
+              class:list={["project", project.featured && "project--featured", project.shape && `project--${project.shape}`]}
+              aria-label={`${t.work.view} ${project.name}, ${project.tags[0]}, ${project.year}`}
+              data-cursor="VIEW"
+            >
+              <div class="project-plate" style={`--plate-delay: ${Math.min(index * 70, 150)}ms`}>
+                <div class="plate-art">
+                  {project.n === "01" && (
+                    <svg viewBox="0 0 1200 520" aria-hidden="true" focusable="false">
+                      <rect width="1200" height="520" class="plate-surface" />
+                      <circle class="plate-letter" cx="170" cy="258" r="238" />
+                      <circle class="plate-line" cx="796" cy="260" r="178" />
+                      <circle class="plate-line plate-line--soft" cx="796" cy="260" r="129" />
+                      <circle class="plate-line" cx="796" cy="260" r="80" />
+                      <path class="local-contour" d="M-20 410c191-175 348-170 474-48 139 134 248 133 373 8 111-111 224-127 393-37" />
+                      <path class="plate-sweep" d="M797 82A178 178 0 0 1 958 337" />
+                      <circle class="oxide-disc" cx="1056" cy="121" r="30" />
+                      <text class="plate-coord" x="1050" y="474">F / 01 · 19.43 N</text>
+                    </svg>
+                  )}
+                  {project.n === "02" && (
+                    <svg viewBox="0 0 720 900" aria-hidden="true" focusable="false">
+                      <rect width="720" height="900" class="plate-surface plate-surface--dark" />
+                      <g class="plate-grid">
+                        <path d="M86 0v900M190 0v900M294 0v900M398 0v900M502 0v900M606 0v900" />
+                        <path d="M0 120h720M0 240h720M0 360h720M0 480h720M0 600h720M0 720h720M0 840h720" />
+                      </g>
+                      <path class="local-contour local-contour--light" d="M-24 754c101-78 159-194 232-202 93-10 111 156 199 126 86-29 81-226 176-254 68-20 112 58 173 108" />
+                      <path class="north-arrow" d="M360 130 294 346l66-38 66 38-66-216Zm0 178v267" />
+                      <circle class="oxide-disc" cx="360" cy="675" r="36" />
+                      <text class="plate-coord plate-coord--light" x="56" y="64">M / 02</text>
+                      <text class="plate-coord plate-coord--light" x="514" y="850">TRUE NORTH</text>
+                    </svg>
+                  )}
+                  {project.n === "03" && (
+                    <svg viewBox="0 0 960 600" aria-hidden="true" focusable="false">
+                      <rect width="960" height="600" class="plate-surface plate-surface--light" />
+                      <circle class="light-field" cx="486" cy="301" r="210" />
+                      <path class="aperture" d="M219 301a267 267 0 0 1 452-193M753 301a267 267 0 0 1-450 196M486 34a267 267 0 0 1 231 400M486 568A267 267 0 0 1 255 167" />
+                      <path class="local-contour" d="M-30 480c187-64 277-230 429-188 126 34 147 197 280 161 97-26 132-145 311-127" />
+                      <path class="coordinate-cross" d="M486 267v68M452 301h68" />
+                      <circle class="oxide-disc" cx="486" cy="301" r="22" />
+                      <text class="plate-coord" x="52" y="65">V / 03 · SYSTEM STUDY</text>
+                    </svg>
+                  )}
+                  {project.n === "04" && (
+                    <svg viewBox="0 0 980 620" aria-hidden="true" focusable="false">
+                      <rect width="980" height="620" class="plate-surface" />
+                      <g class="index-rules">
+                        <path d="M64 104h234M64 150h160M64 196h260M64 242h190M64 288h232" />
+                        <path d="M82 92v208M112 92v208M142 92v208" />
+                      </g>
+                      <text class="plate-number" x="576" y="568">04</text>
+                      <path class="leaf-loop local-contour" d="M371 352c88-189 259-238 374-132 98 90 32 251-119 255-151 3-204-113-131-218 61-87 169-97 226-36" />
+                      <path class="leaf-vein" d="M423 428c101-56 194-118 298-207" />
+                      <circle class="oxide-disc" cx="421" cy="429" r="26" />
+                      <text class="plate-coord" x="66" y="554">CITY INDEX / 04</text>
+                    </svg>
+                  )}
+                </div>
+              </div>
+              <div class="project-meta">
+                <span class="project-name"><span class="project-index">{project.n}</span>{project.name}</span>
+                <span class="project-tag">{project.tags[0]}</span>
+                <span class="project-year">{project.year}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
     </section>
 
-    <!-- About -->
-    <section class="about" id="about">
-      <div class="lbl reveal">{t.about.label}</div>
-      <p class="body reveal" set:html={t.about.text} />
+    <section class="about" id="about" aria-labelledby="about-title">
+      <p class="eyebrow reveal-text">{t.about.label}</p>
+      <h2 id="about-title" class="about-copy reveal-text" set:html={t.about.text} />
     </section>
 
-    <!-- Experience -->
-    <section class="exp">
-      <div class="exp-head reveal">
-        <span>{t.experience.year}</span>
-        <span>{t.experience.place}</span>
-        <span>{t.experience.role}</span>
-        <span style="text-align: right">{t.experience.location}</span>
+    <section class="experience" aria-labelledby="experience-title">
+      <div class="experience-title-row reveal-text">
+        <p class="eyebrow">{t.experience.label}</p>
+        <h2 id="experience-title">{t.experience.title}</h2>
       </div>
-      {experience.map((e, i) => (
-        <div class="exp-row reveal" style={`transition-delay: ${i * 60}ms`}>
-          <span class="yr">{e.yr}</span>
-          <span class="place">{e.place}</span>
-          <span class="role">{e.role}</span>
-          <span class="loc">{e.loc}</span>
+      <div class="experience-head reveal-rule" aria-hidden="true">
+        <span>{t.experience.year}</span><span>{t.experience.place}</span><span>{t.experience.role}</span><span>{t.experience.location}</span>
+      </div>
+      {experience.map((entry, index) => (
+        <div class="experience-row" style={`--row-delay: ${Math.min(index * 50, 150)}ms`}>
+          <span class="experience-year">{entry.yr}</span>
+          <span class="experience-place">{entry.place}</span>
+          <span class="experience-role">{entry.role}</span>
+          <span class="experience-location">{entry.loc}</span>
         </div>
       ))}
     </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="contact">
-      <h2 class="big reveal">{t.footer.cta} <em>{t.footer.ctaEm}</em></h2>
-      <div class="email-row reveal" style="transition-delay: 160ms">
-        <a href="mailto:hola@ximena.mx">hola@ximena.mx</a>
-      </div>
-      <div class="row reveal">
-        <span>{t.footer.copyright}</span>
-        <span>{t.footer.coords}</span>
-        <span>{t.footer.status}</span>
+    <footer class="contact full-bleed" id="contact" data-contact>
+      <div class="contact-inner">
+        <p class="eyebrow reveal-text">{t.footer.prompt}</p>
+        <div class="contact-action">
+          <svg class="contact-orbit" viewBox="0 0 900 420" aria-hidden="true" focusable="false" data-contact-orbit>
+            <ellipse cx="450" cy="210" rx="406" ry="156" />
+            <ellipse class="contact-orbit--soft" cx="450" cy="210" rx="354" ry="126" />
+            <path d="M450 54V30M438 38h24" />
+            <circle cx="856" cy="210" r="7" />
+            <text x="76" y="353">19.4326° N / 99.1332° W</text>
+          </svg>
+          <h2 id="contact-title" class="contact-title reveal-text">{t.footer.cta}<em>{t.footer.ctaEm === "." ? t.footer.ctaEm : ` ${t.footer.ctaEm}`}</em></h2>
+          <a class="email reveal-text" href="mailto:hola@ximena.mx" data-cursor="MAIL">hola@ximena.mx</a>
+        </div>
+        <div class="contact-meta reveal-rule">
+          <span>{t.footer.copyright}</span>
+          <span>{t.footer.coords}</span>
+          <span>{t.footer.status}</span>
+        </div>
       </div>
     </footer>
   </main>
 </Layout>
 
 <style>
-  /* Top */
+  .skip-link {
+    position: fixed;
+    z-index: 80;
+    top: 8px;
+    left: 8px;
+    min-height: 48px;
+    padding: 14px 18px;
+    background: var(--elevated);
+    color: var(--text);
+    font-family: var(--ff-mono);
+    font-size: 13px;
+    transform: translateY(-140%);
+    transition: transform var(--fast) var(--ease);
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .atmosphere {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .ink-bloom {
+    position: absolute;
+    width: min(900px, 72vw);
+    aspect-ratio: 1;
+    border-radius: 9999px;
+    opacity: 0.2;
+  }
+
+  .ink-bloom--oxide {
+    top: -35vw;
+    right: -18vw;
+    background: radial-gradient(circle, rgba(225, 87, 45, 0.26), rgba(225, 87, 45, 0) 70%);
+  }
+
+  .ink-bloom--graphite {
+    bottom: -44vw;
+    left: -24vw;
+    background: radial-gradient(circle, rgba(23, 26, 22, 0.22), rgba(23, 26, 22, 0) 70%);
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.028;
+    mix-blend-mode: multiply;
+  }
+
+  .living-contour {
+    position: absolute;
+    top: clamp(90px, 10vw, 160px);
+    left: 50%;
+    width: max(1024px, 108vw);
+    height: auto;
+    transform: translateX(-50%);
+    stroke: var(--text);
+    stroke-width: 1.25;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+    opacity: 0.34;
+    mix-blend-mode: multiply;
+  }
+
+  .contour-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: calc(1 - var(--contour-progress));
+  }
+
+  .contour-path--soft { opacity: 0.36; }
+  .contour-path--oxide { stroke: var(--accent); opacity: 0.8; }
+  .living-contour circle:first-of-type { fill: var(--accent); stroke: none; }
+  .living-contour circle:last-of-type { opacity: 0.45; }
+
+  .progress-rail {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    right: 9px;
+    bottom: 0;
+    width: 1px;
+    background: rgba(20, 23, 19, 0.16);
+    pointer-events: none;
+  }
+
+  .progress-rail span {
+    display: block;
+    width: 2px;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleY(var(--page-progress));
+    transform-origin: top;
+  }
+
+  .custom-cursor {
+    display: none;
+    position: fixed;
+    z-index: 70;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--text);
+    border-radius: 9999px;
+    pointer-events: none;
+    transform: translate3d(var(--cursor-x, -60px), var(--cursor-y, -60px), 0) translate(-50%, -50%) scale(var(--cursor-scale, 1));
+    transition: transform var(--base) var(--ease), opacity var(--fast) linear;
+    opacity: 0;
+  }
+
+  .cursor-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    background: var(--accent);
+    transform: translate(-50%, -50%);
+  }
+
+  .cursor-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: var(--text);
+    font-family: var(--ff-mono);
+    font-size: 7px;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  .custom-cursor.is-visible { opacity: 1; }
+  .custom-cursor.is-active { --cursor-scale: 2; background: var(--elevated); }
+  .custom-cursor.is-active .cursor-core { opacity: 0; }
+  .custom-cursor.is-active .cursor-label { opacity: 1; }
+
+  .portfolio {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 40px var(--page-pad) 0;
+  }
+
   .top {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
+    min-height: 48px;
     font-size: 13px;
-    letter-spacing: 0.02em;
-  }
-
-  .top .mark {
-    font-size: 16px;
-    font-weight: 500;
   }
 
   .top-right {
@@ -138,365 +402,724 @@ const experience = [
     gap: 24px;
   }
 
-  .top .status {
+  .mark { font-size: 16px; font-weight: 560; letter-spacing: -0.02em; }
+
+  .status {
     display: flex;
     align-items: center;
     gap: 10px;
+    color: var(--muted);
     font-family: var(--ff-mono);
     font-size: 11px;
-    opacity: 0.7;
+    letter-spacing: 0.06em;
   }
 
-  .top .dot {
+  .status-dot {
     width: 7px;
     height: 7px;
-    background: #5b8a4a;
-    border-radius: 50%;
-    box-shadow: 0 0 0 3px rgba(91,138,74,0.18);
-    animation: pulse 2.4s ease-in-out infinite;
+    border-radius: 9999px;
+    background: var(--success);
+    box-shadow: 0 0 0 3px rgba(63, 125, 79, 0.18);
+    animation: availability 2.4s ease-in-out infinite;
   }
 
-  @keyframes pulse {
-    50% { box-shadow: 0 0 0 6px rgba(91,138,74,0.0); }
+  @keyframes availability {
+    50% { box-shadow: 0 0 0 7px rgba(63, 125, 79, 0); }
   }
 
-  /* Hero */
   .hero {
+    position: relative;
+    min-height: min(850px, calc(100vh - 88px));
+    padding-top: clamp(72px, 10vh, 128px);
+    isolation: isolate;
+  }
+
+  .hero h1 {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-family: var(--ff-display);
+    font-size: clamp(72px, 14vw, 214px);
+    font-stretch: 72%;
+    font-weight: 510;
+    line-height: 0.82;
+    letter-spacing: -0.055em;
+  }
+
+  .hero-line {
+    display: flex;
+    width: 100%;
+    align-items: baseline;
+    gap: 0.18em;
+    overflow: hidden;
+  }
+
+  .hero-line-inner {
+    display: inline-block;
+    transition: transform var(--sequence) var(--ease), opacity var(--emphasis) var(--ease);
+  }
+
+  :global(.js:not(.hero-ready)) .hero-line-inner {
+    opacity: 0;
+    transform: translateY(115%);
+  }
+
+  :global(.js.hero-ready) .hero-line--two .hero-line-inner { transition-delay: 80ms; }
+  :global(.js.hero-ready) .hero-line--three .hero-line-inner { transition-delay: 160ms; }
+  :global(.js.hero-ready) .hero-line--four .hero-line-inner { transition-delay: 240ms; }
+
+  .hero-line--two,
+  .hero-line--four { justify-content: flex-end; }
+
+  .hero-line em,
+  .work-head em,
+  .about-copy em,
+  .contact-title em,
+  .practice-copy em {
+    font-family: var(--ff-editorial);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .practice-pill {
+    padding: 11px 18px;
+    border: 1px solid var(--text);
+    border-radius: 9999px;
+    font-family: var(--ff-display);
+    font-size: clamp(11px, 1.25vw, 20px);
+    font-stretch: 100%;
+    font-weight: 440;
+    letter-spacing: 0;
+    line-height: 1;
+    white-space: nowrap;
+    transform: translateY(-0.45em);
+  }
+
+  .hero-orbit {
+    position: absolute;
+    z-index: 1;
+    top: 6%;
+    right: -2%;
+    width: clamp(200px, 29vw, 440px);
+    overflow: visible;
+    color: var(--text);
+    transform: translate3d(var(--hero-x, 0), var(--hero-y, 0), 0) rotate(-12deg);
+    transition: transform var(--emphasis) var(--ease);
+  }
+
+  .hero-orbit-ring { fill: none; stroke: currentColor; stroke-width: 1.2; }
+  .hero-orbit-core { fill: var(--accent); stroke: none; }
+
+  .scroll-cue {
+    position: absolute;
+    z-index: 3;
+    bottom: 40px;
+    left: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-width: 188px;
+    min-height: 48px;
+    border-bottom: 1px solid var(--text);
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .scroll-cue svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.4; }
+  .scroll-cue:hover svg,
+  .scroll-cue:focus-visible svg { transform: translateY(4px); transition: transform var(--base) var(--ease); }
+
+  .eyebrow {
+    margin: 0;
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.11em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .practice {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.62fr) minmax(420px, 1.38fr);
+    gap: clamp(40px, 8vw, 128px);
+    padding: 128px 0 160px;
+  }
+
+  .practice-label h2 {
+    margin: 40px 0 0;
+    font-size: clamp(28px, 3vw, 40px);
+    font-stretch: 80%;
+    font-weight: 480;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+  }
+
+  .practice-copy > p {
+    max-width: 68ch;
+    margin: 40px 0 0;
+    color: var(--muted);
+    font-size: clamp(20px, 2.1vw, 28px);
+    font-weight: 380;
+    letter-spacing: -0.022em;
+    line-height: 1.42;
+    text-wrap: pretty;
+  }
+
+  .reveal-rule { height: 1px; background: currentColor; opacity: 0.34; transform-origin: left; }
+
+  .current {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 24px;
+    max-width: 68ch;
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(20, 23, 19, 0.22);
+  }
+
+  .current p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; text-wrap: pretty; }
+
+  .full-bleed { width: 100vw; margin-left: calc(50% - 50vw); }
+
+  .work-band {
+    position: relative;
+    background: var(--inverse);
+    color: var(--text-inverse);
+  }
+
+  .band-inner,
+  .contact-inner {
+    width: 100%;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding-inline: var(--page-pad);
+  }
+
+  .band-inner { padding-top: 128px; padding-bottom: 160px; }
+
+  .work-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+  }
+
+  .work-head .eyebrow { color: var(--subtle); }
+
+  .work-head h2 {
+    margin: 0;
+    font-size: clamp(40px, 6vw, 80px);
+    font-stretch: 82%;
+    font-weight: 460;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+
+  .work-rule { grid-column: 1 / -1; margin-top: 16px; background: var(--text-inverse); }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(64px, 8vw, 128px) clamp(16px, 3vw, 48px);
     margin-top: 80px;
   }
 
-  .hero .row {
-    font-family: var(--ff-display);
-    font-weight: 500;
-    font-size: clamp(72px, 15vw, 220px);
-    line-height: 0.86;
-    letter-spacing: -0.05em;
-    display: flex;
-    align-items: baseline;
-    gap: 0.18em;
-    flex-wrap: wrap;
-    margin: 0;
-  }
+  .project { grid-column: span 6; min-width: 0; }
+  .project--featured { grid-column: 1 / -1; }
+  .project--portrait { grid-column: 1 / span 5; }
+  .project--landscape { grid-column: 7 / -1; align-self: center; }
+  .project--offset { grid-column: 3 / span 8; }
 
-  .hero .row + .row {
-    margin-top: -0.04em;
-  }
-
-  .hero .r2 {
-    justify-content: flex-end;
-  }
-
-  .hero .r4 {
-    justify-content: flex-end;
-  }
-
-  .hero em {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  .hero .ampshape {
-    width: 0.6em;
-    height: 0.6em;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #d4b88a, #8a7a52);
-    display: inline-block;
-    vertical-align: middle;
-    transform: translateY(-0.1em);
-    flex-shrink: 0;
-  }
-
-  .hero .pill {
-    display: inline-block;
-    font-size: clamp(14px, 1.4vw, 22px);
-    font-family: var(--ff-body);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    padding: 0.6em 1.2em;
-    border: 1px solid var(--ink);
-    border-radius: 100px;
-    transform: translateY(-0.4em);
-    white-space: nowrap;
-  }
-
-  /* Lede */
-  .lede {
-    margin-top: 100px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--gap);
-    border-top: 1px solid var(--rule);
-    padding-top: 40px;
-  }
-
-  .lede .lbl,
-  .about .lbl,
-  .exp-head {
-    font-family: var(--ff-mono);
-    font-size: 11px;
-    opacity: 0.55;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 18px;
-  }
-
-  .lede p {
-    font-size: clamp(18px, 1.6vw, 22px);
-    line-height: 1.45;
-    margin: 0;
-    color: var(--ink-2);
-    font-weight: 300;
-    letter-spacing: -0.01em;
-    max-width: 480px;
-  }
-
-  .lede p :global(em) {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    color: var(--ink);
-  }
-
-  /* Work */
-  .work-head {
-    margin-top: 200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 24px;
-  }
-
-  .work-head .l {
-    font-family: var(--ff-mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    opacity: 0.55;
-  }
-
-  .work-head h2 {
-    font-family: var(--ff-display);
-    font-weight: 400;
-    font-size: clamp(40px, 5vw, 64px);
-    letter-spacing: -0.03em;
-    margin: 0;
-  }
-
-  .work-head h2 em {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-  }
-
-  .work-grid {
-    margin-top: 64px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px var(--gap);
-  }
-
-  .proj {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .proj.featured {
-    grid-column: 1 / -1;
-  }
-
-  .proj .thumb {
-    aspect-ratio: 16 / 10;
-    border-radius: 8px;
-    overflow: hidden;
+  .project-plate {
     position: relative;
-    transition: transform 0.7s cubic-bezier(.2,.7,.2,1);
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--surface);
+    clip-path: inset(0 0 0 0);
+    transition: clip-path var(--sequence) var(--ease), transform var(--emphasis) var(--ease);
+    transition-delay: var(--plate-delay, 0ms);
   }
 
-  .proj.featured .thumb {
-    aspect-ratio: 21 / 9;
+  .project--featured .project-plate { aspect-ratio: 21 / 9; }
+  .project--portrait .project-plate { aspect-ratio: 4 / 5; }
+
+  .plate-art {
+    width: 100%;
+    height: 100%;
+    transform: translateY(0) scale(1);
+    transition: transform var(--emphasis) var(--ease);
   }
 
-  .proj:hover .thumb {
-    transform: scale(1.01);
+  .plate-art svg { display: block; width: 100%; height: 100%; }
+  .plate-surface { fill: var(--surface); }
+  .plate-surface--dark { fill: #242821; }
+  .plate-surface--light { fill: var(--elevated); }
+  .plate-line,
+  .local-contour,
+  .aperture,
+  .coordinate-cross,
+  .index-rules,
+  .leaf-vein {
+    fill: none;
+    stroke: var(--text);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
   }
 
-  .proj .meta {
+  .plate-letter { fill: none; stroke: var(--text); stroke-width: 108; }
+  .plate-line--soft { opacity: 0.36; }
+  .plate-sweep { fill: none; stroke: var(--accent); stroke-width: 24; stroke-linecap: round; }
+  .oxide-disc { fill: var(--accent); transform-box: fill-box; transform-origin: center; transform: scale(0.72); transition: transform var(--emphasis) var(--ease); }
+  .plate-coord { fill: var(--muted); font-family: var(--ff-mono); font-size: 13px; letter-spacing: 0.12em; }
+  .plate-coord--light { fill: var(--text-inverse); }
+  .plate-grid { fill: none; stroke: var(--text-inverse); stroke-width: 1; opacity: 0.16; }
+  .local-contour--light { stroke: var(--text-inverse); }
+  .north-arrow { fill: none; stroke: var(--text-inverse); stroke-width: 2; }
+  .light-field { fill: var(--background); opacity: 0.5; }
+  .aperture { stroke-width: 3; }
+  .coordinate-cross { stroke-width: 2; }
+  .index-rules { opacity: 0.5; }
+  .plate-number { fill: var(--text); font-family: var(--ff-editorial); font-size: 430px; font-style: italic; opacity: 0.1; }
+  .leaf-loop { stroke-width: 2; }
+
+  .project-meta {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr auto auto;
     gap: 24px;
     align-items: baseline;
+    min-height: 64px;
+    padding-top: 18px;
   }
 
-  .proj .meta .name {
-    font-family: var(--ff-display);
-    font-size: clamp(22px, 2.2vw, 32px);
-    font-weight: 400;
+  .project-meta::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--emphasis) var(--ease);
+  }
+
+  .project-name { display: flex; gap: 16px; font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.025em; }
+  .project-index,
+  .project-tag,
+  .project-year { color: #aeb5aa; font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.04em; }
+  .project-index { padding-top: 7px; }
+
+  .project:hover .plate-art,
+  .project:focus-visible .plate-art { transform: translateY(-8px) scale(1.025); }
+  .project:hover .local-contour,
+  .project:focus-visible .local-contour { transform: translateX(8px); transition: transform var(--emphasis) var(--ease); }
+  .project:hover .oxide-disc,
+  .project:focus-visible .oxide-disc { transform: scale(1); }
+  .project:hover .project-meta::before,
+  .project:focus-visible .project-meta::before { transform: scaleX(1); }
+
+  .about {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: clamp(32px, 6vw, 96px);
+    padding: 160px 0 128px;
+  }
+
+  .about-copy {
+    max-width: 920px;
+    margin: 0;
+    font-size: clamp(28px, 4.2vw, 64px);
+    font-stretch: 82%;
+    font-weight: 380;
+    letter-spacing: -0.04em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  .experience { padding-bottom: 160px; }
+
+  .experience-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 48px;
+  }
+
+  .experience-title-row h2 { margin: 0; font-size: clamp(28px, 3vw, 40px); font-weight: 450; letter-spacing: -0.035em; }
+
+  .experience-head,
+  .experience-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 1fr minmax(140px, 220px);
+    gap: 24px;
+  }
+
+  .experience-head {
+    height: auto;
+    padding-bottom: 16px;
+    opacity: 1;
+    color: var(--muted);
+    background: none;
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .experience-head span:last-child,
+  .experience-location { text-align: right; }
+
+  .experience-row {
+    position: relative;
+    align-items: baseline;
+    min-height: 88px;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(77, 84, 74, 0.34);
+  }
+
+  .experience-row::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--emphasis) var(--ease);
+  }
+
+  .experience-row:hover::after,
+  .experience-row:focus-within::after { transform: scaleX(1); }
+  .experience-year,
+  .experience-location { color: var(--muted); font-family: var(--ff-mono); font-size: 11px; }
+  .experience-place { font-size: 20px; letter-spacing: -0.02em; }
+  .experience-role { color: var(--muted); font-size: 13px; }
+
+  .contact {
+    position: relative;
+    overflow: hidden;
+    background: var(--inverse);
+    color: var(--text-inverse);
+  }
+
+  .contact-inner { padding-top: 96px; padding-bottom: 32px; }
+  .contact .eyebrow { color: #aeb5aa; }
+
+  .contact-action {
+    position: relative;
+    display: flex;
+    min-height: clamp(440px, 56vw, 680px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-orbit {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(900px, 90vw);
+    overflow: visible;
+    fill: none;
+    stroke: var(--text-inverse);
+    stroke-width: 1.2;
+    transform: translate(-50%, -50%) rotate(var(--contact-rotation, 0deg));
+    transform-origin: center;
+    opacity: 0.7;
+  }
+
+  .contact-orbit--soft { opacity: 0.3; }
+  .contact-orbit circle { fill: var(--accent); stroke: none; }
+  .contact-orbit text { fill: #7d8678; stroke: none; font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.12em; }
+
+  .contact-title {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-size: clamp(72px, 14vw, 214px);
+    font-stretch: 72%;
+    font-weight: 500;
+    letter-spacing: -0.055em;
+    line-height: 0.86;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .email {
+    position: relative;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    margin-top: 48px;
+    overflow: hidden;
+    font-size: clamp(16px, 2vw, 28px);
     letter-spacing: -0.02em;
   }
 
-  .proj .meta .yr,
-  .proj .meta .tag {
-    font-family: var(--ff-mono);
-    font-size: 11px;
-    opacity: 0.55;
+  .email::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 2px;
+    left: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: translateX(-102%);
+    transition: transform var(--emphasis) var(--ease);
   }
 
-  /* About */
-  .about {
-    margin-top: 200px;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: var(--gap);
-  }
+  .email:hover::after,
+  .email:focus-visible::after { transform: translateX(0); }
 
-  .about .body {
-    font-family: var(--ff-display);
-    font-size: clamp(28px, 3.4vw, 48px);
-    line-height: 1.18;
-    letter-spacing: -0.025em;
-    font-weight: 300;
-    margin: 0;
-    max-width: 880px;
-  }
-
-  .about .body :global(em) {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  /* Experience */
-  .exp {
-    margin-top: 160px;
-  }
-
-  .exp-head {
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 90px 1fr 1fr 200px;
-    gap: 24px;
-    margin-bottom: 0;
-  }
-
-  .exp-row {
-    display: grid;
-    grid-template-columns: 90px 1fr 1fr 200px;
-    gap: 24px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--rule);
-    align-items: baseline;
-    font-size: 16px;
-  }
-
-  .exp-row .yr {
-    font-family: var(--ff-mono);
-    font-size: 12px;
-    opacity: 0.6;
-  }
-
-  .exp-row .place {
-    font-family: var(--ff-display);
-    font-size: clamp(18px, 1.7vw, 22px);
-    letter-spacing: -0.015em;
-    font-weight: 400;
-  }
-
-  .exp-row .role {
-    color: var(--ink-3);
-    font-size: 14px;
-  }
-
-  .exp-row .loc {
-    font-family: var(--ff-mono);
-    font-size: 11px;
-    opacity: 0.55;
-    text-align: right;
-  }
-
-  /* Footer */
-  .footer {
-    margin-top: 220px;
-    padding: 100px 0 0;
-    border-top: 1px solid var(--rule);
-    position: relative;
-  }
-
-  .footer .big {
-    font-family: var(--ff-display);
-    font-size: clamp(96px, 14vw, 200px);
-    line-height: 0.9;
-    letter-spacing: -0.05em;
-    font-weight: 500;
-    margin: 0;
-    text-align: center;
-  }
-
-  .footer .big em {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  .footer .email-row {
-    margin-top: 60px;
-    text-align: center;
-    font-size: clamp(20px, 2.4vw, 32px);
-    font-weight: 300;
-    letter-spacing: -0.01em;
-  }
-
-  .footer .email-row a {
-    text-decoration: none;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 6px;
-  }
-
-  .footer .row {
-    margin-top: 120px;
-    padding-top: 24px;
-    border-top: 1px solid var(--rule);
+  .contact-meta {
     display: flex;
+    height: auto;
     justify-content: space-between;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(233, 237, 230, 0.26);
+    background: none;
+    color: #aeb5aa;
     font-family: var(--ff-mono);
     font-size: 11px;
-    opacity: 0.55;
-    flex-wrap: wrap;
-    gap: 16px;
   }
 
-  /* Responsive */
-  @media (max-width: 760px) {
-    .lede,
-    .about {
-      grid-template-columns: 1fr;
-    }
+  :global(.js) .reveal-text,
+  :global(.js) .experience-row {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity var(--sequence) var(--ease), transform var(--sequence) var(--ease);
+  }
 
-    .work-grid {
-      grid-template-columns: 1fr;
-    }
+  :global(.js) .experience-row {
+    transform: translateY(16px);
+    transition-delay: var(--row-delay, 0ms);
+  }
 
-    .exp-head,
-    .exp-row {
-      grid-template-columns: 60px 1fr 1fr;
-      gap: 12px;
-      font-size: 13px;
-    }
+  :global(.js) .reveal-rule { transform: scaleX(0); transition: transform var(--sequence) var(--ease); }
+  :global(.js) .project .project-plate { clip-path: inset(0 0 100% 0); }
+  :global(.js) .project .project-plate .plate-art { transform: translateY(24px) scale(1); }
 
-    .exp-head > :last-child,
-    .exp-row .loc {
-      display: none;
-    }
+  :global(.js) .reveal-text.is-visible,
+  :global(.js) .experience-row.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    .hero .pill {
-      transform: none;
-    }
+  :global(.js) .reveal-rule.is-visible { transform: scaleX(1); }
+  :global(.js) .project.is-visible .project-plate { clip-path: inset(0 0 0 0); }
+  :global(.js) .project.is-visible .project-plate .plate-art { transform: translateY(0) scale(1); }
+  :global(.js) .project.is-visible:hover .plate-art,
+  :global(.js) .project.is-visible:focus-visible .plate-art { transform: translateY(-8px) scale(1.025); }
 
-    .top-right {
-      gap: 16px;
+  @media (hover: hover) and (pointer: fine) {
+    :global(body) { cursor: none; }
+    .custom-cursor { display: block; }
+  }
+
+  @media (max-width: 1023px) {
+    .living-contour { width: 1280px; left: 54%; opacity: 0.24; }
+    .hero { min-height: 720px; }
+    .project--portrait { grid-column: 1 / span 6; }
+    .project--landscape { grid-column: 7 / -1; }
+    .project--offset { grid-column: 3 / span 8; }
+  }
+
+  @media (max-width: 767px) {
+    .progress-rail { display: none; }
+    .portfolio { padding-top: 20px; }
+    .top { align-items: flex-start; }
+    .top-right { align-items: flex-end; flex-direction: column; gap: 8px; }
+    .status { max-width: 150px; justify-content: flex-end; text-align: right; }
+    .hero { min-height: 650px; padding-top: 64px; }
+    .hero-line--three { flex-wrap: wrap; }
+    .hero-orbit { top: 12%; right: -20%; opacity: 0.75; }
+    .practice { grid-template-columns: 1fr; gap: 48px; padding: 96px 0 112px; }
+    .practice-label h2 { margin-top: 24px; }
+    .current { grid-template-columns: 1fr; gap: 16px; }
+    .about { grid-template-columns: 1fr; padding: 112px 0 96px; }
+    .experience-head,
+    .experience-row { grid-template-columns: 72px 1fr 1fr; gap: 12px; }
+    .experience-head span:last-child,
+    .experience-location { display: none; }
+    .contact-meta { flex-wrap: wrap; }
+  }
+
+  @media (max-width: 639px) {
+    .living-contour { width: 940px; left: 68%; opacity: 0.2; }
+    .hero { min-height: 610px; }
+    .hero h1 { font-size: clamp(72px, 22vw, 92px); line-height: 0.84; }
+    .practice-pill { margin-top: 8px; transform: none; }
+    .scroll-cue { bottom: 24px; }
+    .band-inner { padding-top: 96px; padding-bottom: 112px; }
+    .work-head { grid-template-columns: 1fr; }
+    .work-rule { grid-column: 1; }
+    .work-grid { grid-template-columns: 1fr; gap: 72px; margin-top: 64px; }
+    .project,
+    .project--featured,
+    .project--portrait,
+    .project--landscape,
+    .project--offset { grid-column: 1; }
+    .project--featured .project-plate,
+    .project--portrait .project-plate { aspect-ratio: 4 / 3; }
+    .project-meta { grid-template-columns: 1fr auto; gap: 8px 16px; min-height: 72px; }
+    .project-year { grid-column: 2; }
+    .project-tag { grid-column: 2; grid-row: 1; }
+    .project-name { grid-row: 1 / span 2; }
+    .experience-title-row { align-items: flex-start; flex-direction: column; gap: 24px; }
+    .experience-head { display: none; }
+    .experience-row { grid-template-columns: 64px 1fr; min-height: 104px; }
+    .experience-role { grid-column: 2; }
+    .experience { padding-bottom: 112px; }
+    .contact-inner { padding-top: 64px; }
+    .contact-action { min-height: 430px; }
+    .contact-orbit { width: 150vw; }
+    .contact-title { font-size: clamp(72px, 24vw, 112px); }
+    .contact-meta { flex-direction: column; padding-bottom: 8px; }
+    :global(.js) .reveal-text { transform: translateY(12px); }
+    :global(.js) .experience-row { transform: translateY(8px); transition-delay: min(var(--row-delay, 0ms), 150ms); }
+    :global(.js) .project .project-plate .plate-art { transform: translateY(12px) scale(1); }
+  }
+
+  @media (max-width: 359px) {
+    .hero h1 { font-size: 72px; }
+    .hero-orbit { width: 190px; }
+    .project-name { gap: 8px; font-size: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contour-path { stroke-dashoffset: 0; }
+    .hero-line-inner,
+    .reveal-text,
+    .reveal-rule,
+    .experience-row,
+    .project-plate,
+    .plate-art,
+    .contact-orbit,
+    .hero-orbit {
+      opacity: 1 !important;
+      clip-path: inset(0 0 0 0) !important;
+      transform: none !important;
     }
+    .contact-orbit { transform: translate(-50%, -50%) !important; }
+    .status-dot { animation: none; }
+    .custom-cursor { display: none !important; }
+    :global(body) { cursor: auto !important; }
   }
 </style>
+
+<script>
+  const root = document.documentElement;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  if (reducedMotion) {
+    root.classList.add("hero-ready");
+    root.style.setProperty("--contour-progress", "1");
+    root.style.setProperty("--page-progress", "1");
+  } else {
+    const fontReady = document.fonts?.ready ?? Promise.resolve();
+    const timeout = new Promise<void>((resolve) => window.setTimeout(resolve, 700));
+    Promise.race([fontReady, timeout]).then(() => {
+      requestAnimationFrame(() => root.classList.add("hero-ready"));
+    });
+
+    const observed = document.querySelectorAll(".reveal-text, .reveal-rule, .project, .experience-row");
+    const projectsToReveal = Array.from(document.querySelectorAll<HTMLElement>(".project"));
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -7% 0px", threshold: 0.08 });
+    observed.forEach((element) => revealObserver.observe(element));
+
+    const contact = document.querySelector<HTMLElement>("[data-contact]");
+    let scrollFrame = 0;
+    const updateScroll = () => {
+      const scrollRange = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+      const progress = Math.min(Math.max(window.scrollY / scrollRange, 0), 1);
+      root.style.setProperty("--page-progress", progress.toFixed(4));
+      root.style.setProperty("--contour-progress", (0.2 + progress * 0.8).toFixed(4));
+
+      projectsToReveal.forEach((project) => {
+        if (project.classList.contains("is-visible")) return;
+        const projectRect = project.getBoundingClientRect();
+        if (projectRect.top < window.innerHeight * 0.93 || projectRect.bottom < 0) {
+          project.classList.add("is-visible");
+          revealObserver.unobserve(project);
+        }
+      });
+
+      if (contact) {
+        const rect = contact.getBoundingClientRect();
+        const sectionProgress = Math.min(Math.max((window.innerHeight - rect.top) / (window.innerHeight + rect.height), 0), 1);
+        contact.style.setProperty("--contact-rotation", `${(-9 + sectionProgress * 18).toFixed(2)}deg`);
+      }
+      scrollFrame = 0;
+    };
+
+    const queueScrollUpdate = () => {
+      if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScroll);
+    };
+    window.addEventListener("scroll", queueScrollUpdate, { passive: true });
+    window.addEventListener("resize", queueScrollUpdate, { passive: true });
+    queueScrollUpdate();
+  }
+
+  if (finePointer && !reducedMotion) {
+    const cursor = document.querySelector<HTMLElement>(".custom-cursor");
+    const cursorLabel = cursor?.querySelector<HTMLElement>(".cursor-label");
+    const hero = document.querySelector<HTMLElement>("[data-hero]");
+    let pointerFrame = 0;
+    let pointerX = -60;
+    let pointerY = -60;
+
+    window.addEventListener("pointermove", (event) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      if (!pointerFrame) {
+        pointerFrame = requestAnimationFrame(() => {
+          cursor?.style.setProperty("--cursor-x", `${pointerX}px`);
+          cursor?.style.setProperty("--cursor-y", `${pointerY}px`);
+          cursor?.classList.add("is-visible");
+          pointerFrame = 0;
+        });
+      }
+    }, { passive: true });
+
+    document.addEventListener("pointerover", (event) => {
+      const target = event.target as Element;
+      const action = target.closest<HTMLElement>("a[data-cursor]");
+      cursor?.classList.toggle("is-active", Boolean(action));
+      if (action && cursorLabel) cursorLabel.textContent = action.dataset.cursor ?? "VIEW";
+    });
+
+    document.addEventListener("pointerleave", () => cursor?.classList.remove("is-visible"));
+
+    hero?.addEventListener("pointermove", (event) => {
+      const rect = hero.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 16;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 16;
+      hero.style.setProperty("--hero-x", `${x.toFixed(2)}px`);
+      hero.style.setProperty("--hero-y", `${y.toFixed(2)}px`);
+    }, { passive: true });
+    hero?.addEventListener("pointerleave", () => {
+      hero.style.setProperty("--hero-x", "0px");
+      hero.style.setProperty("--hero-y", "0px");
+    });
+  }
+</script>

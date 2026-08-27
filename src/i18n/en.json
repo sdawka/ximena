@@ -15,6 +15,7 @@
   },
   "practice": {
     "label": "↳ The Approach",
+    "title": "Strategy, made tangible.",
     "text": "I bring a <em>design sensibility</em> to project management — orchestrating teams, timelines, and creative vision into work that ships on time and <em>feels right</em>."
   },
   "currently": {
@@ -24,13 +25,18 @@
   "work": {
     "label": "↳ Selected · 04 of 12",
     "title": "Recent",
-    "titleEm": "work."
+    "titleEm": "work.",
+    "action": "Scroll to work",
+    "skip": "Skip to selected work",
+    "view": "View"
   },
   "about": {
     "label": "↳ About",
     "text": "I'm a project lead based in Mexico City who believes great work happens when <em>strategy meets craft</em>. Previously at <em>Estudio Raíz</em> and <em>Ideame</em>. Now independent, working with teams who care about <em>how</em> things get made."
   },
   "experience": {
+    "label": "↳ Experience",
+    "title": "Selected places",
     "year": "Year",
     "place": "Place",
     "role": "Role",
@@ -43,6 +49,7 @@
     }
   },
   "footer": {
+    "prompt": "↳ Have something considered in mind?",
     "cta": "Let's",
     "ctaEm": "talk.",
     "copyright": "© 2025 Ximena Alvarez Sosa",

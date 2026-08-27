@@ -15,6 +15,7 @@
   },
   "practice": {
     "label": "↳ El Enfoque",
+    "title": "Estrategia, hecha tangible.",
     "text": "Aporto una <em>sensibilidad de diseño</em> a la gestión de proyectos — orquestando equipos, tiempos y visión creativa en trabajo que se entrega a tiempo y <em>se siente bien</em>."
   },
   "currently": {
@@ -24,13 +25,18 @@
   "work": {
     "label": "↳ Selección · 04 de 12",
     "title": "Trabajo",
-    "titleEm": "reciente."
+    "titleEm": "reciente.",
+    "action": "Ver proyectos",
+    "skip": "Saltar a proyectos seleccionados",
+    "view": "Ver"
   },
   "about": {
     "label": "↳ Acerca de",
     "text": "Soy líder de proyectos en la Ciudad de México que cree que el gran trabajo sucede cuando <em>la estrategia se encuentra con el oficio</em>. Anteriormente en <em>Estudio Raíz</em> e <em>Ideame</em>. Ahora independiente, trabajando con equipos que se preocupan por <em>cómo</em> se hacen las cosas."
   },
   "experience": {
+    "label": "↳ Experiencia",
+    "title": "Trayectoria seleccionada",
     "year": "Año",
     "place": "Lugar",
     "role": "Rol",
@@ -43,6 +49,7 @@
     }
   },
   "footer": {
+    "prompt": "↳ ¿Tienes un proyecto con intención?",
     "cta": "Hablemos",
     "ctaEm": ".",
     "copyright": "© 2025 Ximena Alvarez Sosa",
