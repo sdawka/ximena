@@ -1,8 +1,8 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://sdawka.github.io",
-  base: "/ximena",
+  site: "https://ximena.uk",
+  base: "/",
   outDir: "dist",
   i18n: {
     defaultLocale: "en",
