@@ -6,8 +6,8 @@ export type Locale = "en" | "es";
 const translations: Record<Locale, typeof en> = { en, es };
 
 export function getLocaleFromUrl(url: URL): Locale {
-  const [, lang] = url.pathname.split("/");
-  if (lang === "es") return "es";
+  const segments = url.pathname.split("/").filter(Boolean);
+  if (segments.includes("es")) return "es";
   return "en";
 }
 

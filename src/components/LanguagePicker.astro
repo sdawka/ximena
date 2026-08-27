@@ -1,15 +1,15 @@
 ---
-import { getLocaleFromUrl, getLocalizedPath, type Locale } from "../i18n/utils";
+import { getLocaleFromUrl } from "../i18n/utils";
 
 const locale = getLocaleFromUrl(Astro.url);
-const otherLocale: Locale = locale === "en" ? "es" : "en";
-const otherPath = getLocalizedPath(Astro.url.pathname, otherLocale);
+const englishPath = locale === "es" ? "../" : "./";
+const spanishPath = locale === "es" ? "./" : "./es/";
 ---
 
 <div class="lang-picker">
-  <a href="/" class:list={["lang", { active: locale === "en" }]}>EN</a>
+  <a href={englishPath} class:list={["lang", { active: locale === "en" }]} aria-current={locale === "en" ? "page" : undefined}>EN</a>
   <span class="sep">/</span>
-  <a href="/es" class:list={["lang", { active: locale === "es" }]}>ES</a>
+  <a href={spanishPath} class:list={["lang", { active: locale === "es" }]} aria-current={locale === "es" ? "page" : undefined}>ES</a>
 </div>
 
 <style>
